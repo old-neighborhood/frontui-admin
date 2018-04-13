@@ -19,67 +19,67 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class UserController {
-	//默认页面
-	@RequestMapping(value= {"/","/index"})
+	// 默认页面
+	@RequestMapping(value = { "/", "/index" })
 	public String index(ModelMap map) {
 		return "/index";
 	}
-	
-	//login
+
+	// login
 	@RequestMapping("/login")
 	public String login(ModelMap map) {
 		return "/login";
 	}
-	
-	//register
+
+	// register
 	@RequestMapping("/register")
 	public String register(ModelMap map) {
 		return "/register";
 	}
-	
-	//用户协议
+
+
+	// 用户协议
 	@RequestMapping("/agree")
 	public String agree(ModelMap map) {
 		return "/agree";
 	}
-	
-	//login out
+
+	// login out
 	@RequestMapping("/loginout")
 	public String loginout(ModelMap map, HttpSession session) {
 		session.invalidate();
 		return "/login";
 	}
-	
+
 	@Value("${login.url}")
 	private String url;
-	
+
 	@RequestMapping("/loginValidation")
 	@ResponseBody
-	public String user(@RequestBody Map<String, Object> reqMap, ModelMap map, HttpSession session) throws JSONException {
+	public String user(@RequestBody Map<String, Object> reqMap, ModelMap map, HttpSession session)
+			throws JSONException {
 		System.out.println("loginValidation");
-		User user = new User(
-				reqMap.get("username").toString(),
-				reqMap.get("password").toString(),
+		User user = new User(reqMap.get("username").toString(), reqMap.get("password").toString(),
 				reqMap.get("type").toString());
 		RestTemplate restTemplate = new RestTemplate();
 		String res = restTemplate.postForObject(url, reqMap, String.class);
 		System.out.println(res);
 		JSONObject json = JSONObject.fromObject(res);
 		if (json.getString("result").equals("success")) {
-//			user.setUser_ID(user_ID);
+			// user.setUser_ID(user_ID);
 			session.setAttribute("user", user);
 		}
 		return res;
 	}
-	
-	//profile
-	@RequestMapping("/profile")
+
+	// profile
+	@RequestMapping("/info")
 	public String profile(ModelMap map, HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		if (user == null) {
-			return "/login";
-		}
-		return "/index";
+//		User user = (User) session.getAttribute("user");
+//		if (user == null) {
+//			return "/login";
+//		}
+		return "/info";
 	}
 
 }
