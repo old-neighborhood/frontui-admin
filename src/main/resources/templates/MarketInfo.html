@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="./vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="./css/sb-admin.css" rel="stylesheet" />
+<style>
+.border-bottom-1 {
+	border-bottom: 1px solid #000 !important;
+}
+</style>
+</head>
+<body>
+	<h1>MarketInfo</h1>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/SalerIndex">Home</a></li>
+			<li class="breadcrumb-item"><a href="/MarketList">marketList</a></li>
+			<li class="breadcrumb-item active" aria-current="page">MarketInfo</li>
+		</ol>
+	</nav>
+	<div class="container">
+		<div class="list-unstyled">
+			<div class="media border-dark">
+				<div class="media-body m-3">
+					<div class="col-md-9">
+						<h1 id="m_name">店铺名称</h1>
+						<input type="hidden" value="msg[i].m_ID" />
+						<div class="mx-1">
+							<div id="star">star</div>
+							地址：<label id="m_address">msg[i].m_address</label><br /> 电话：<label
+								id="m_tele">msg[i].m_tele</label><br /> 邮箱：<label id="m_email">msg[i].m_email</label><br />
+							类型：<label id="m_type"></label><br /> 介绍：<label id="m_intro">msg[i].m_intro</label><br />
+							状态：<label id="m_state">msg[i].m_state</label><br /> 创建时间：<label
+								id="m_date">date</label>
+						</div>
+					</div>
+				</div>
+				<img id="head" name="image" data-toggle="modal"
+					data-target="#myModal"
+					class="img-responsive pull-right col-md-3 mt-3 mr-3 block"
+					height='300' />
+			</div>
+			<div class="media border-dark mt-2">
+				<div class="media-body m-3">
+					<div class="row col-md-auto border-bottom-1 border-dark">
+						<label class=""><strong>商品列表</strong></label>
+						<div class="pull-right text-center offset-md-10">
+							<button id="addGood" data-toggle="modal" data-target="#addModal" class="btn btn-primary btn-sm mb-2">添加商品</button>
+						</div>
+					</div>
+					<div id="card"></div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- addGood -->
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">添加商品</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+				<form>
+					<div class="form-group row">
+						<label for="goodName" class="col-md-3 col-form-label">商品名称：</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" id="addName"
+								placeholder="商品名称" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodPrice" class="col-md-3 col-form-label">商品价格：</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" id="addPrice"
+								placeholder="商品价格" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodAmount" class="col-md-3 col-form-label">商品数量：</label>
+						<div class="col-md-9">
+							<input type="number" min="0" class="form-control" id="addAmount"
+								placeholder="商品数量" value='0'/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodImg" class="col-sm-3 col-form-label">商品图片：</label>
+						<div class="col-sm-9">
+							<img id="addImg" name="image" data-toggle="modal" data-target="#myModal"
+								class="img-thumbnail img-responsive" height="50"
+								width="50" />
+							<input class="col-sm-9" type="file" id="addImage" onchange="javascript:window.upImg(this)"
+								name="uploadImg"
+								accept="image/gif, image/jpeg, image/png, image/jpg"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodIntro" class="col-sm-3 col-form-label">商品介绍：</label>
+						<div class="col-sm-9">
+							<textarea class="form-control" placeholder="商品介绍" rows="5" id="addIntro"></textarea>
+						</div>
+					</div>
+				</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button id="confirmAdd" type="button" class="btn btn-primary">添加</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- showGood -->
+	<div class="modal fade" id="showModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">商品信息</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+				<form>
+					<div class="form-group row">
+						<label for="goodName" class="col-md-3 col-form-label">商品名称：</label>
+						<label id="showName" class="col-md-9 col-form-label"></label>
+					</div>
+					<div class="form-group row">
+						<label for="goodPrice" class="col-md-3 col-form-label">商品价格：</label>
+							<label id="showPrice" class="col-md-9 col-form-label"></label>
+					</div>
+					<div class="form-group row">
+						<label for="goodAmount" class="col-md-3 col-form-label">商品数量：</label>
+						<label id="showAmount" class="col-md-9 col-form-label"></label>
+					</div>
+					<div class="form-group row">
+						<label for="goodImg" class="col-sm-3 col-form-label">商品图片：</label>
+							<img id="showImg" name="image" data-toggle="modal" data-target="#myModal"
+								class="img-thumbnail img-responsive" height="50"
+								width="50" />
+					</div>
+					<div class="form-group row">
+						<label for="goodIntro" class="col-sm-3 col-form-label">商品介绍：</label>
+						<label id="showIntro" class="col-md-9 col-form-label"></label>
+					</div>
+				</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- modGood -->
+	<div class="modal fade" id="modModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">修改商品</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+				<form>
+					<div class="form-group row">
+						<label for="goodName" class="col-md-3 col-form-label">商品名称：</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" id="modName"
+								placeholder="商品名称" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodPrice" class="col-md-3 col-form-label">商品价格：</label>
+						<div class="col-md-9">
+							<input type="number" class="form-control" id="modPrice"
+								placeholder="商品价格" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodAmount" class="col-md-3 col-form-label">商品数量：</label>
+						<div class="col-md-9">
+							<input type="number" min="0" class="form-control" id="modAmount"
+								placeholder="商品数量" value='0'/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodImg" class="col-sm-3 col-form-label">商品图片：</label>
+						<div class="col-sm-9">
+							<img id="modImg" name="image" data-toggle="modal" data-target="#myModal"
+								class="img-thumbnail img-responsive" height="50"
+								width="50" />
+							<input class="col-sm-9" type="file" id="modImage" onchange="javascript:window.upImg(this)"
+								name="uploadImg"
+								accept="image/gif, image/jpeg, image/png, image/jpg"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="goodIntro" class="col-sm-3 col-form-label">商品介绍：</label>
+						<div class="col-sm-9">
+							<textarea class="form-control" placeholder="商品介绍" rows="5" id="modIntro"></textarea>
+						</div>
+					</div>
+				</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button id="confirmMod" type="button" class="btn btn-primary">修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- delGood -->
+	<div class="modal fade" id="delModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">确认删除？</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="confirmDel" type="button" class="btn btn-primary">删除</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- image -->
+	<div class="modal fade" id="myModal" tabindex="0" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+
+		<div class="modal-dialog" id="large-image"></div>
+		<!-- /.modal-content -->
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="./vendor/datatables/jquery.dataTables.js"></script>
+	<script src="./vendor/datatables/dataTables.bootstrap4.js"></script>
+	<script src="./js/sb-admin.min.js"></script>
+	<script src="./js/sb-admin-datatables.min.js"></script>
+	<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+	<script type="text/javascript">
+/*<![CDATA[*/
+Date.prototype.format = function(format)
+{
+var o = {
+"M+" : this.getMonth()+1, //month
+"d+" : this.getDate(),    //day
+"h+" : this.getHours(),   //hour
+"m+" : this.getMinutes(), //minute
+"s+" : this.getSeconds(), //second
+"q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+"S" : this.getMilliseconds() //millisecond
+}
+if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+(this.getFullYear()+"").substr(4 - RegExp.$1.length));
+for(var k in o)if(new RegExp("("+ k +")").test(format))
+format = format.replace(RegExp.$1,
+RegExp.$1.length==1 ? o[k] :
+("00"+ o[k]).substr((""+ o[k]).length));
+return format;
+}
+/*]]>*/
+</script>
+	<script type="text/javascript">
+/*<![CDATA[*/
+	$(document).on('click',"[name='image']",function(e){   
+			  var src=$(this).attr("src");
+		   var large_image = "<img src='" + src + "'/>";
+		   $('#large-image').html($(large_image).animate({ height: '100%', width: '100%' }, 500));
+			  //console.log(src);
+		  });	
+	
+	 $.ajax({
+		    async: false,
+		    type: "GET",
+		    cache:false, 
+		    dataType: 'json',
+		    url: "/getMarket",
+		    timeout: 3000,
+		    contentType: "application/json;utf-8",
+		    success: function(msg) {
+		    	console.log(msg);
+		    	$("#m_name").text(msg.m_name);
+		    	$("#head").attr("src",msg.m_image);
+		    	$("#m_address").text(msg.m_address);
+		    	$("#m_tele").text(msg.m_tele);
+		    	$("#m_email").text(msg.m_email);
+		    	$("#m_type").text(msg.m_type);
+		    	$("#m_intro").text(msg.m_intro);
+		    	$("#m_state").text(msg.m_state);
+		    	$("#m_date").text( (new Date(parseFloat(msg.m_date))).format("yyyy-MM-dd hh:mm:ss"));
+		    	var h = '';
+		    	for(var i=0;i<5;i++){
+		    		if(i<parseInt(msg.m_score/100))
+		    			h+='★';
+		    		else
+		    			h+=	'☆';
+		    	}
+		    	$("#star").html(h);
+		    }
+		    });
+	 
+	 var m_ID = "";
+	 $.ajax({
+	     async: false,
+	     type: "GET",
+	     cache:false, 
+	     //dataType: 'json',
+	     url: "/getM_ID",
+	     timeout: 3000,
+	     contentType: "application/json;utf-8",
+	     success: function(msg) {
+	    	 console.log(msg);
+	     	m_ID = msg;
+	     },error:function(XMLHttpRequest, textStatus, errorThrown){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
+	     	console.log(textStatus+":"+errorThrown);
+	     	layer.msg("请求未成功" , {anim: 6 });
+	     }});
+	 
+	 $.ajax({
+		    async: false,
+		    type: "GET",
+		    cache:false, 
+		    dataType: 'json',
+		    url: "/getGoods",
+		    data: {"m_ID":m_ID},
+		    timeout: 3000,
+		    contentType: "application/json;utf-8",
+		    success: function(msg) {
+		    	console.log(msg);
+		    	var content = '';
+		    	for(var i=0;i<Math.ceil(msg.length/6);i++){
+		    		content+='<div class="row">';
+		    		for(var j=0;6*i+j<msg.length&&j<6;j++){
+		    			content+='<div class="col-sm-2 mt-3"><div class="card card-block">'+
+		    			'<input type="hidden" value="'+msg[6*i+j].g_ID+'"/>'+
+		    			'<h5 class="card-title text-center mb-0"><a data-toggle="modal" data-target="#showModal" name="showGood" class="text-dark" href="#">'+msg[6*i+j].g_name+'</a></h5>'+
+		    			'<img name="image" data-toggle="modal" data-target="#myModal"'+
+					'class="img-responsive pull-right bg-primary m-1 block"'+
+					' src="'+msg[6*i+j].g_image+
+					'" height="80" />'+
+		    			'<p class="card-text">'+msg[6*i+j].g_intro+'</p>'+
+		    			'<div class="row offset-md-1"><a data-toggle="modal" data-target="#modModal" href="#" name="modGood" class="btn btn-primary btn-sm m-1 ">修改</a>'+
+		    			'<a href="#" data-toggle="modal" data-target="#delModal" name="delGood" class="btn btn-secondary btn-sm m-1">删除</a>'+
+		    			'</div></div></div>';
+		    		}
+		    		content+='</div>';
+		    		$("#card").html(content);
+		    	}
+		    }
+	 });
+	
+	 $("#confirmAdd").click(function (e) {
+		 var m_ID = "";
+			$.ajax({
+			    async: false,
+			    type: "GET",
+			    cache:false, 
+			    //dataType: 'json',
+			    url: "/getM_ID",
+			    timeout: 3000,
+			    contentType: "application/json;utf-8",
+			    success: function(msg) {
+			    	m_ID = msg;
+			    },error:function(XMLHttpRequest, textStatus, errorThrown){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
+			    	console.log(textStatus+":"+errorThrown);
+			    	layer.msg("请求未成功" , {anim: 6 });
+			    }});
+			
+			 $.ajax({
+				    type: "POST",
+				    async: false,
+		             cache: false,
+		             dataType:"json",
+				    url: "/addGood",
+				    contentType:"application/json",
+				     data: JSON.stringify({
+		            	'g_name':$("#addName").val(),
+		            	'm_ID':m_ID,
+		    			'g_price':$("#addPrice").val(),
+		    			'g_amount':$("#addAmount").val(),
+		    			'g_image':$("#addImg").attr("src"),
+		    			'g_type':"food",
+		    			'g_intro':$("#addIntro").val()
+		            }), 
+				    timeout: 3000,
+				  // contentType: "application/jsonp;utf-8",
+				    success:function(data){
+				    	layer.msg("保存成功" , {anim: 6 });
+		            	 setTimeout('window.location.href="MarketInfo"',1000);
+		                 //window.location.href="marketList.html";
+				    },
+				    error: function(){
+	    				alert("error");
+	    	    		//请求出错处理
+	    	    				}
+			 }); 
+	 });
+	 
+	 $(document).on('click',"[name='showGood']",function(e){ 
+			id = $(this).parents(".card").find("input").val();
+			console.log(id);
+			$.ajax({
+				async: false,
+			    type: "GET",
+			    cache:false, 
+			    dataType: 'json',
+			    url: "/setG_ID",
+			    data: {"g_ID":id},
+			    timeout: 3000,
+			    contentType: "application/json;utf-8",
+			  // contentType: "application/jsonp;utf-8",
+			    success:function(data){
+			    }});
+			
+			 $.ajax({
+				    async: false,
+				    type: "GET",
+				    cache:false, 
+				    dataType: 'json',
+				    url: "/getGood",
+				    timeout: 3000,
+				    contentType: "application/json;utf-8",
+				    success: function(msg) {
+				    	console.log(msg.g_price);
+				    	$("#showName").text(msg.g_name);
+				    	
+				    	$("#showPrice").text(msg.g_price);
+				    	$("#showImg").attr("src",msg.g_image);
+				    	$("#showAmount").text(msg.g_amount);
+				    	$("#showIntro").text(msg.g_intro);
+				    }
+			 });
+		});
+	 
+	 $(document).on('click',"[name='modGood']",function(e){ 
+			id = $(this).parents(".card").find("input").val();
+			console.log(id);
+			$.ajax({
+				async: false,
+			    type: "GET",
+			    cache:false, 
+			    dataType: 'json',
+			    url: "/setG_ID",
+			    data: {"g_ID":id},
+			    timeout: 3000,
+			    contentType: "application/json;utf-8",
+			  // contentType: "application/jsonp;utf-8",
+			    success:function(data){
+			    }});
+			 $.ajax({
+				    async: false,
+				    type: "GET",
+				    cache:false, 
+				    dataType: 'json',
+				    url: "/getGood",
+				    timeout: 3000,
+				    contentType: "application/json;utf-8",
+				    success: function(msg) {
+				    	console.log(msg.g_price);
+				    	$("#modName").val(msg.g_name);
+				    	
+				    	$("#modPrice").val(msg.g_price);
+				    	$("#modImg").attr("src",msg.g_image);
+				    	$("#modAmount").val(msg.g_amount);
+				    	$("#modIntro").val(msg.g_intro);
+				    }
+			 });
+			
+		});
+	 $("#confirmMod").click(function (e) {
+		 $.ajax({
+			    type: "POST",
+			    async: false,
+	             cache: false,
+	             dataType:"json",
+			    url: "/modifyGood",
+			    contentType:"application/json",
+			     data: JSON.stringify({
+	            	'g_name':$("#modName").val(),
+	    			'g_price':$("#modPrice").val(),
+	    			'g_amount':$("#modAmount").val(),
+	    			'g_image':$("#modImg").attr("src"),
+	    			'g_intro':$("#modIntro").val()
+	            }), 
+			    timeout: 3000,
+			  // contentType: "application/jsonp;utf-8",
+			    success:function(data){
+			    	layer.msg("保存成功" , {anim: 6 });
+	            	 setTimeout('window.location.href="MarketInfo"',1000);
+	                 //window.location.href="marketList.html";
+			    },
+			    error: function(){
+ 				alert("error");
+ 	    		//请求出错处理
+ 	    				}
+		 }); 
+	 });
+	 
+	 $(document).on('click',"[name='delGood']",function(e){ 
+			id = $(this).parents(".card").find("input").val();
+			console.log(id);
+			$.ajax({
+				async: false,
+			    type: "GET",
+			    cache:false, 
+			    dataType: 'json',
+			    url: "/setG_ID",
+			    data: {"g_ID":id},
+			    timeout: 3000,
+			    contentType: "application/json;utf-8",
+			  // contentType: "application/jsonp;utf-8",
+			    success:function(data){
+			    }});
+	 });
+	 
+	 $("#confirmDel").click(function (e) {
+		 $.ajax({
+			    type: "GET",
+			    async: false,
+		         cache: false,
+		         data:{"g_ID":id},
+		         dataType:"json",
+			    url: "/deleteGood",
+			    contentType:"application/json",
+			    timeout: 3000,
+			  // contentType: "application/jsonp;utf-8",
+			    success:function(data){
+			    	layer.msg("删除成功" , {anim: 6 });
+		          	 setTimeout('window.location.href="/MarketInfo"',1000);
+		            //window.location.href="marketList.html";
+			    },
+			    error: function(){
+					alert("error");
+		    		//请求出错处理
+		    				}
+		 }); 
+	 });
+	 
+	 function upImg(obj){  
+	     var imgFile = obj.files[0];  
+	    var img = new Image();  
+	    var fr = new FileReader();  
+	    fr.onload = function(){  
+	        document.getElementById("addImg").src=fr.result;
+	        document.getElementById("modImg").src=fr.result;
+	   // console.log(fr.result);
+	    }  
+	    fr.readAsDataURL(imgFile);  
+	}
+	/*]]>*/
+</script>
+</body>
+</html>

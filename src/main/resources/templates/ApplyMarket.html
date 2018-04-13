@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+<link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="./vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="./css/sb-admin.css" rel="stylesheet" />
+</head>
+<body>
+<h1>ApplyMarket</h1>
+<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/SalerIndex">Home</a></li>
+			<li class="breadcrumb-item"><a href="/MarketList">marketList</a></li>
+			<li class="breadcrumb-item active" aria-current="page">applyMarket</li>
+		</ol>
+	</nav>
+
+	<div class="container">
+		<div class="card card-login mx-auto mt-5">
+			<div class="card-header">个人信息</div>
+			<div class="card-body">
+				<form id="applyForm" method="post">
+					<div class="form-group row">
+						<label for="marketName" class="col-sm-3 col-form-label">商铺名称：</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="m_name"
+								placeholder="商铺名称" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="marketAddress" class="col-sm-3 col-form-label">商铺地址：</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="m_address"
+								placeholder="商铺地址" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="marketTele" class="col-sm-3 col-form-label">商铺电话：</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="m_tele"
+								placeholder="商铺电话" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="marketEmail" class="col-sm-3 col-form-label">商铺邮箱：</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="m_email"
+								placeholder="商铺邮箱" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="Select" class="col-sm-3 col-form-label">商铺类型：</label>
+						<div class="col-sm-9">
+							<select id="m_type" class="form-control">
+								<option></option>
+								<option value="food">美食</option>
+								<option value="hotel">酒店</option>
+								<option value="shop">商店</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="marketImg" class="col-sm-3 col-form-label">商铺图片：</label>
+						<div class="col-sm-9">
+							<img id="head" data-toggle="modal" data-target="#myModal"
+								class="img-thumbnail img-responsive" height="50"
+								width="50" />
+							<input class="col-sm-9" type="file" id="m_image" onchange="javascript:window.upImg(this)"
+								name="uploadImg"
+								accept="image/gif, image/jpeg, image/png, image/jpg"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="marketIntro" class="col-sm-3 col-form-label">商铺介绍：</label>
+						<div class="col-sm-9">
+							<textarea class="form-control" placeholder="商铺介绍" rows="5" id="m_intro"></textarea>
+						</div>
+					</div>
+				</form>
+					<button id="saveMarket" class="btn btn-primary btn-block">保存</button>
+
+			</div>
+			
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="0" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+
+		<div class="modal-dialog" id="large-image"></div>
+		<!-- /.modal-content -->
+	</div>
+	
+	<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="./vendor/datatables/jquery.dataTables.js"></script>
+	<script src="./vendor/datatables/dataTables.bootstrap4.js"></script>
+	<script src="./js/sb-admin.min.js"></script>
+	<script src="./js/sb-admin-datatables.min.js"></script>
+	<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+	<script type="text/javascript">
+/*<![CDATA[*/
+	
+	$(document).on('click',"#saveMarket",function(e){
+		var s_ID = "";
+		$.ajax({
+		    async: false,
+		    type: "GET",
+		    cache:false, 
+		    //dataType: 'json',
+		    url: "/getID",
+		    timeout: 3000,
+		    contentType: "application/json;utf-8",
+		    success: function(msg) {
+		    	s_ID = msg;
+		    },error:function(XMLHttpRequest, textStatus, errorThrown){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
+		    	console.log(textStatus+":"+errorThrown);
+		    	layer.msg("请求未成功" , {anim: 6 });
+		    }});
+		
+			  $.ajax({
+				    type: "POST",
+				    async: false,
+		             cache: false,
+		             dataType:"json",
+				    url: "/addMarket",
+				    contentType:"application/json",
+				     data: JSON.stringify({
+		            	'm_name':$("#m_name").val(),
+		            	's_ID':s_ID,
+		    			'm_address':$("#m_address").val(),
+		    			'm_tele':$("#m_tele").val(),
+		    			'm_email':$("#m_email").val(),
+		    			'm_type':$("#m_type").find("option:selected").val(),
+		    			'm_image':$("#head").attr("src"),
+		    			'm_intro':$("#m_intro").val()
+		            }), 
+				    timeout: 3000,
+				  // contentType: "application/jsonp;utf-8",
+				    success:function(data){
+				    	layer.msg("保存成功" , {anim: 6 });
+		            	 setTimeout('window.location.href="/MarketList"',1000);
+		                 //window.location.href="marketList.html";
+				    },
+				    error: function(){
+	    				alert("error");
+	    	    		//请求出错处理
+	    	    				}
+			 }); 
+	});
+	
+	 $(document).on('click',"#head",function(e){   
+			  var src=$(this).attr("src");
+		   var large_image = "<img src='" + src + "'/>";
+			  $('#large-image').html($(large_image).animate({ height: '100%', width: '100%' }, 500));
+		  });
+	
+	function upImg(obj){  
+	     var imgFile = obj.files[0];  
+	    var img = new Image();  
+	    var fr = new FileReader();  
+	    fr.onload = function(){  
+	        document.getElementById("head").src=fr.result;
+	   // console.log(fr.result);
+	    }  
+	    fr.readAsDataURL(imgFile);  
+	}
+	/*]]>*/
+</script>
+</body>
+</html>

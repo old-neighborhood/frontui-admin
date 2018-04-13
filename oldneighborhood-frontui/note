@@ -1,0 +1,6 @@
+http://www.infoq.com/cn/articles/Next-Generation-Session-Management-with-Spring-Session/
+1.配置Spring Session
+	搭建用于Spring Session的数据存储
+	将Spring Session的jar文件添加到web应用中
+	将Spring Session filter添加到web应用的配置中
+	配置Spring Session如何选择session数据存储的连接

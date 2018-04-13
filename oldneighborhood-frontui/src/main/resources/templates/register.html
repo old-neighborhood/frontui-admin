@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Admin-OldNeighborhood | Register</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/iCheck/square/blue.css" />
+  <!-- toastr prompt -->
+  <link href="css/toastr.css" rel="stylesheet"/>
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="index"><b>Admin</b><br/>Old-Neighborhood</a>
+  </div>
+
+  <div class="register-box-body">
+    <p class="login-box-msg">老街坊注册</p>
+
+    <form id="register_form">
+      <div class="form-group has-feedback">
+        <input id="username" name="username" type="text" class="form-control" placeholder="用户名" />
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input id="userphone" name="userphone" type="tel" class="form-control" placeholder="手机号码" />
+        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+      	<div class="row">
+        	<div class="col-xs-5">
+         	 <input class="form-control btn btn-primary center-block" type="button" id="getCode" value="获取验证码" />
+        	</div>
+        	<div class="col-xs-7">
+          	<input id="usercode" name="usercode" class="form-control" type="text" placeholder="输入验证码" />
+         	<!--  <span class="glyphicon glyphicon-comment form-control-feedback"></span> -->
+        	</div>
+        <!-- /.col -->
+      	</div>
+      </div>
+      <div class="form-group has-feedback">
+        <input id="userpassword" name="userpassword" type="password" class="form-control" placeholder="密码" />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input id="confirmpassword" name="confirmpassword" type="password" class="form-control" placeholder="确认密码" />
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+      <div class="form-group">
+		<label class="form-check-label"> 
+		<input class="form-check-input" name="usertype" type="radio" value="user" checked="checked" /> 普通用户 </label> 
+		<label class="form-check-label"> 
+		<input	class="form-check-input" name="usertype" type="radio" value="saler" /> 商户用户 </label> 
+	  </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label for="agree">我同意<a href="agree" target="_blank">协议</a></label>
+            <input id="agree" name="agree" type="checkbox" class="form-control" /> 
+            
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button id="register" type="button" class="btn btn-primary btn-block btn-flat">注册</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <!-- <div class="social-auth-links text-center">
+      <p>- OR -</p>
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
+        Facebook</a>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
+        Google+</a>
+    </div> -->
+
+    <a href="login" class="text-center">-> 去登录吧</a>
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="js/toastr.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/register.js"></script>
+
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+  });
+</script>
+</body>
+</html>

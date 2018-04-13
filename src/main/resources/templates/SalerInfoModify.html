@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Custom fonts for this template-->
+<link href="./vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<!-- Custom styles for this template-->
+<link href="./css/sb-admin.css" rel="stylesheet" />
+</head>
+<body>
+	<h1>SalerInfo</h1>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="salerIndex">Home</a></li>
+			<li class="breadcrumb-item"><a href="salerInfo">salerInfo</a></li>
+			<li class="breadcrumb-item active" aria-current="page">salerInfoModify</li>
+		</ol>
+	</nav>
+	<div id="test"></div>
+	<div class="container">
+		<div class="card card-login mx-auto mt-5">
+			<div class="card-header">个人信息</div>
+			<div class="card-body">
+				<table class="table table-bordered" id="infoTable"></table>
+			</div>
+			<button id="save">保存</button>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="0" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" id="large-image"></div>
+	</div>
+	
+	 
+	<script src="./vendor/jquery/jquery.min.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!-- Page level plugin JavaScript-->
+	<script src="./vendor/datatables/jquery.dataTables.js"></script>
+	<script src="./vendor/datatables/dataTables.bootstrap4.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="./js/sb-admin.min.js"></script>
+	<!-- Custom scripts for this page-->
+	<script src="./js/sb-admin-datatables.min.js"></script>
+	<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+	<script type="text/javascript">
+	/*<![CDATA[*/
+	Date.prototype.format = function(format)
+{
+ var o = {
+ "M+" : this.getMonth()+1, //month
+ "d+" : this.getDate(),    //day
+ "h+" : this.getHours(),   //hour
+ "m+" : this.getMinutes(), //minute
+ "s+" : this.getSeconds(), //second
+ "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+ "S" : this.getMilliseconds() //millisecond
+ }
+ if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+ (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+ for(var k in o)if(new RegExp("("+ k +")").test(format))
+ format = format.replace(RegExp.$1,
+ RegExp.$1.length==1 ? o[k] :
+ ("00"+ o[k]).substr((""+ o[k]).length));
+ return format;
+}
+		var salerId = null;
+	$().ready(function() {
+		
+		var s_ID = "";
+		$.ajax({
+		    async: false,
+		    type: "GET",
+		    cache:false, 
+		    //dataType: 'json',
+		    url: "/getID",
+		    timeout: 3000,
+		    contentType: "application/json;utf-8",
+		    success: function(msg) {
+		    	s_ID = msg;
+		    },error:function(XMLHttpRequest, textStatus, errorThrown){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
+		    	console.log(textStatus+":"+errorThrown);
+		    	layer.msg("请求未成功" , {anim: 6 });
+		    }});
+		
+			 $.ajax({
+				    async: false,
+				    type: "GET",
+				    cache:false, 
+				    dataType: 'json',
+				    data: {"s_ID":s_ID},
+				    url: "/info",
+				    timeout: 3000,
+				   contentType: "application/json;utf-8",
+				    success: function(msg) {
+				     	console.log(msg);
+				     	var info = msg;
+			 			var infoTable = $('#infoTable');
+				     	salerId = info.s_ID;
+						var salerName = info.s_name;
+						var salerPassword = info.s_password;
+						var salerImage = info.s_image;
+						var salerTele = info.s_tele;
+						var salerEmail = info.s_email;
+						if(info.s_email==null){
+							salerEmail="";
+						}
+						var salerAddress = info.s_address;
+						var salerSignature = info.s_signature;
+						var salerDate = (new Date(parseFloat(info.s_date))).format("yyyy-MM-dd hh:mm:ss");
+						var salerScore = info.s_score;
+						infoTable.html(
+								 '<tbody>'
+								+'<tr><td>image</td><td><img id="head" data-toggle="modal" data-target="#myModal" class="rounded-circle img-thumbnail img-responsive" height="50" width="50" src="'+ salerImage+'"/>'
+								+'<input type="file" id="upImg" onchange="upImg(this)" name="uploadImg" accept="image/gif, image/jpeg, image/png, image/jpg"/></td></tr>'
+								+'<tr><td>ID</td><td>'+ salerId + '</td></tr>'
+								+'<tr><td>name</td><td><input type="text" id="name" value="'+ salerName + '"/></td></tr>'
+								+'<tr><td>password</td><td><input type="text" id="password" value="'+ salerPassword + '"/></td></tr>'
+								+'<tr><td>tele</td><td><input type="text" id="tele" value="'+ salerTele + '"/></td></tr>'
+								+'<tr><td>email</td><td><input type="text" id="email" value="'+ salerEmail + '"/></td></tr>'
+								+'<tr><td>address</td><td><input type="text" id="address" value="'+ salerAddress + '"/></td></tr>'
+								+'<tr><td>signature</td><td><input type="text" id="signature" value="'+ salerSignature + '"/></td></tr>'
+								+'<tr><td>date</td><td>'+ salerDate + '</td></tr>'
+								+'<tr><td>score</td><td>'+ salerScore + '</td></tr>'
+								+'</tbody>'
+						);
+				    },
+				    error:function(XMLHttpRequest, textStatus, errorThrown){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
+				    	console.log(textStatus+":"+errorThrown);
+				    	layer.msg("请求未成功" , {anim: 6 });
+				    }
+				  });
+	});
+	/*]]>*/			
+	</script>
+	<script type="text/javascript">
+	$(document).on('click',"#save",function(e){   
+		var fd = new FormData();
+		 var file_obj = document.getElementById('upImg').files[0];
+		//console.log(document.getElementById('upImg').value!=null);
+        fd.append('id',salerId);
+		fd.append('name', document.getElementById('name').value);
+		if(document.getElementById('upImg').value!="")
+       	 fd.append('img', document.getElementById("head").src);
+        fd.append('password',document.getElementById('password').value);
+		fd.append('tele',document.getElementById('tele').value);
+		fd.append('email',document.getElementById('email').value);
+		fd.append('address',document.getElementById('address').value);
+		fd.append('signature',document.getElementById('signature').value);
+		 $.ajax({
+             url: 'modify',
+             type: 'POST',
+             data: JSON.stringify({
+            	 'id':salerId,
+            	 'name': document.getElementById('name').value,
+            	 'img':document.getElementById("head").src,
+            	 'password':document.getElementById('password').value,
+            	 'tele':document.getElementById('tele').value,
+            	 'email':document.getElementById('email').value,
+            	 'address':document.getElementById('address').value,
+            	 'signature':document.getElementById('signature').value
+             }),
+             async: false,
+             cache: false,
+             contentType: "application/json;utf-8",
+             processData: false,
+             dataType: "json",//问题就在这里，如果用了jsonp，那么后台就接收不到文件流，无法获得文件流，就没办法把文件写入服务器。如果不指定，就是注释掉，虽然ajax提交之后，还是跑到error那里去，但是文件已经是成功写入服务器的了。
+             
+             success: function() {
+            	 layer.msg("保存成功" , {anim: 6 });
+            	 setTimeout('window.location.href="/salerInfo"',1000);
+                 //window.location.href="salerInfo.html";
+                // alert("success");
+             },
+             error: function(returndata) {
+                 console.log(returndata);
+                // layer.msg("保存成功" , {anim: 6 });
+             }
+         });
+		
+		
+		
+		
+	}) ; 
+		  $(document).on('click',"#head",function(e){   
+			  var src=$(this).attr("src");
+		   var large_image = "<img src=" + src + "/>";
+		   $('#large-image').html($(large_image).animate({ height: '500', width: '500' }, 500));
+		  });
+	
+	function upImg(obj){  
+	    var imgFile = obj.files[0];  
+	    console.log(imgFile);
+	    var img = new Image();  
+	    var fr = new FileReader();  
+	    fr.onload = function(){  
+	        document.getElementById("head").src=fr.result;
+	    console.log(fr.result);
+	    }  
+	    fr.readAsDataURL(imgFile); 
+	}
+	 </script>
+</body>
+</html>
