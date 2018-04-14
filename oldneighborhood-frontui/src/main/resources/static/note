@@ -32,4 +32,7 @@
 6.<!-- 显示代码高亮 -->
 https://github.com/google/code-prettify
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-	
+
+7.文件链接路径问题，放在文件夹里面的需要注意资源找不到
+	-- .html文件放在文件夹里面没问题
+	-- RequestMapping("")可能涉及上下文问题，会找不到资源
