@@ -6,4 +6,29 @@
 	关于文本编辑界面 过时的文件夹删除 - >坚果云adminALT-del
 4./bower_components/Flot/examples/annotating/index.html
 	图表
-5.
+	
+5.File Hierarchy of the Source Code Package
+      AdminLTE/
+      ├── dist/
+      │   ├── CSS/
+      │   ├── JS
+      │   ├── img
+      ├── build/
+      │   ├── less/
+      │   │   ├── AdminLTE's Less files
+      │   └── Bootstrap-less/ (Only for reference. No modifications have been made)
+      │       ├── mixins/
+      │       ├── variables.less
+      │       ├── mixins.less
+      └── plugins/
+          ├── All the customized plugins CSS and JS files
+	dist/文件夹
+		全称是distribution。
+		在某些框架中，因为开发和发布是的内容或者代码形式是不一样的（比如利用Grunt压缩等等)，
+		这时候就需要一个存放最终发布版本的代码，这就是dist文件夹的用处。
+	build/文件夹
+	
+6.<!-- 显示代码高亮 -->
+https://github.com/google/code-prettify
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	
