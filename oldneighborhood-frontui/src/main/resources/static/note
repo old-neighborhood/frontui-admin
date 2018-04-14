@@ -6,7 +6,8 @@
 	关于文本编辑界面 过时的文件夹删除 - >坚果云adminALT-del
 4./bower_components/Flot/examples/annotating/index.html
 	图表
-	
+5.0关于.gitignore的配置
+	https://www.jianshu.com/p/ea6341224e89
 5.File Hierarchy of the Source Code Package
       AdminLTE/
       ├── dist/
