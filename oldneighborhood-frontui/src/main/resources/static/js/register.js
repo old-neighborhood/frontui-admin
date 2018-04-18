@@ -153,7 +153,7 @@ $("#register").click(function(){
     							}else if (status == "success") {
     								toastr.success("注册成功！");
     								setTimeout(function(){
-//    									window.location = "/login";
+    									window.location = "/login";
     								},2000);
     							}
     						},

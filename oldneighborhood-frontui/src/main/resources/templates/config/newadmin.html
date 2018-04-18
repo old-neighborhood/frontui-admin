@@ -19,6 +19,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
+  <link href="css/toastr.css" rel="stylesheet" />
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
 </head>
@@ -204,144 +205,60 @@
                 <div class="row">
                 <div class="col-lg-4 form-group">
                   <label>登录名</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." />
+                  <input name="ad_name" id="ad_name" type="text" class="form-control" placeholder="登录名，如John0701" />
                 </div>
                 <!-- text input -->
                 <div class=" col-lg-4 form-group">
                   <label>密码</label>
-                  <input type="password" class="form-control" placeholder="Enter ..." />
+                  <input name="ad_password" id="ad_password" type="password" class="form-control" placeholder="密码" />
                 </div>
                 </div>
                 <br/>
-
-                <!-- textarea -->
-                <!-- <div class="form-group">
-                  <label>Textarea Disabled</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." disabled="disabled"></textarea>
-                </div> -->
-
-                <!-- input states -->
-                <!-- <div class="form-group has-success">
-                  <label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> Input with success</label>
-                  <input type="text" class="form-control" id="inputSuccess" placeholder="Enter ..." />
-                  <span class="help-block">Help block with success</span>
-                </div>
-                <div class="form-group has-warning">
-                  <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Input with
-                    warning</label>
-                  <input type="text" class="form-control" id="inputWarning" placeholder="Enter ..." />
-                  <span class="help-block">Help block with warning</span>
-                </div>
-                <div class="form-group has-error">
-                  <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> Input with
-                    error</label>
-                  <input type="text" class="form-control" id="inputError" placeholder="Enter ..." />
-                  <span class="help-block">Help block with error</span>
-                </div> -->
-
-                <!-- checkbox -->
-                <!-- <div class="form-group">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" />
-                      Checkbox 1
-                    </label>
-                  </div>
-
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" />
-                      Checkbox 2
-                    </label>
-                  </div> -->
-
-                  <!-- <div class="checkbox">
-                    <label>
-                      <input type="checkbox" disabled="disabled" />
-                      Checkbox disabled
-                    </label>
-                  </div>
-                </div> -->
-
-                <!-- radio -->
-                <!-- <div class="form-group">
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="checked" />
-                      Option one is this and that&mdash;be sure to include why it's great
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                      Option two can be something else and selecting it will deselect option one
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="disabled" />
-                      Option three is disabled
-                    </label>
-                  </div>
-                </div> -->
-
                 <!-- select -->
                 <div class="row">
                   <div class="col-lg-4 form-group">
                     <label>系统配置权限</label>
-                    <select class="form-control">
-                      <option>只读</option>
-                      <option>读写</option>
+                    <select id="config-permission"  name="config-permission" class="form-control">
+                      <option value="R" selected="selected">只读</option>
+                      <option value="W">读写</option>
                     </select>
                   </div>
                   <span> </span>
                   <div class="col-lg-4 form-group">
                     <label>景区管理权限</label>
-                    <select class="form-control">
-                      <option>只读</option>
-                      <option>读写</option>
+                    <select id="site-permission"  name="site-permission" class="form-control">
+                      <option value="R" selected="selected">只读</option>
+                      <option value="W">读写</option>
                     </select>
                   </div>
                 </div>
                 <div class="row">
                 <div class="col-lg-4 form-group">
-                  <label>公告管理权限</label>
-                  <select class="form-control">
-                    <option>只读</option>
-                    <option>读写</option>
+                  <label >公告管理权限</label>
+                  <select id="announce-permission"  name="announce-permission" class="form-control">
+                    <option value="R" selected="selected">只读</option>
+                    <option value="W">读写</option>
                   </select>
                 </div>
                 <div class="col-lg-4 form-group">
                   <label>论坛管理权限</label>
-                  <select class="form-control">
-                    <option>只读</option>
-                    <option>读写</option>
+                  <select id="forum-permission"  name="forum-permission" class="form-control">
+                    <option value="R" selected="selected">只读</option>
+                    <option value="W">读写</option>
                   </select>
                 </div>
                 </div>
                 <div class="row">
                 <div class="col-lg-4 form-group">
                   <label>数据统计权限</label>
-                  <select class="form-control">
-                    <option>只读</option>
-                    <option>读写</option>
+                  <select id="data-permission"  name="data-permission" class="form-control">
+                    <option value="R" selected="selected">只读</option>
+                    <option value="W">读写</option>
                   </select>
                 </div>
                 </div>
-
-                <!-- Select multiple-->
-                <!-- <div class="form-group">
-                  <label>Select Multiple</label>
-                  <select multiple="multiple" class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div> -->
-                
 			    <button id="create" type="button" class="btn btn-primary">添加</button>
+<!-- 			    <button id="create" type="button" class="btn btn-primary" disabled="disabled">添加</button> -->
               </form>
             </div>
             <!-- /.box-body -->
@@ -397,9 +314,12 @@
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="js/config/newadmin.js"></script>
 </body>
 </html>

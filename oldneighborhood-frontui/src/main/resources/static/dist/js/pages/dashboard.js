@@ -27,10 +27,11 @@ $(function () {
     zIndex              : 999999
   });
 
-  // bootstrap WYSIHTML5 - text editor
+  /*// bootstrap WYSIHTML5 - text editor
   $('.textarea').wysihtml5();
-
-  $('.daterange').daterangepicker({
+*/
+/*  选择时间的button
+ * $('.daterange').daterangepicker({
     ranges   : {
       'Today'       : [moment(), moment()],
       'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -43,9 +44,10 @@ $(function () {
     endDate  : moment()
   }, function (start, end) {
     window.alert('You chose: ' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  });
+  });*/
 
-  /* jQueryKnob */
+  /* 旋转按钮
+   * jQueryKnob */
   $('.knob').knob();
 
   // jvectormap data
@@ -63,7 +65,16 @@ $(function () {
     RU: 3000 // Russia
   };
   // World map by jvectormap
-  $('#world-map').vectorMap({
+  
+  
+  var map = new AMap.Map("world-map", {
+		mapStyle : 'amap://styles/b7df64526165ef157ce1d22816e373c1',//样式URL
+		resizeEnable : true,
+		zoom : 11,
+		center : [ 116.397428, 39.90923 ],
+	});
+  
+  /*$('#world-map').vectorMap({
     map              : 'world_mill_en',
     backgroundColor  : 'transparent',
     regionStyle      : {
@@ -89,7 +100,7 @@ $(function () {
         el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
     }
   });
-
+*/
   // Sparkline charts
   var myvalues = [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021];
   $('#sparkline-1').sparkline(myvalues, {
@@ -125,28 +136,27 @@ $(function () {
   });
 
   /* Morris.js Charts */
-  // Sales chart 界面已经删除此图表
-//  var area = new Morris.Area({
-//    element   : 'revenue-chart',
-//    resize    : true,
-//    data      : [
-//      { y: '2011 Q1', item1: 2666, item2: 2666 },
-//      { y: '2011 Q2', item1: 2778, item2: 2294 },
-//      { y: '2011 Q3', item1: 4912, item2: 1969 },
-//      { y: '2011 Q4', item1: 3767, item2: 3597 },
-//      { y: '2012 Q1', item1: 6810, item2: 1914 },
-//      { y: '2012 Q2', item1: 5670, item2: 4293 },
-//      { y: '2012 Q3', item1: 4820, item2: 3795 },
-//      { y: '2012 Q4', item1: 15073, item2: 5967 },
-//      { y: '2013 Q1', item1: 10687, item2: 4460 },
-//      { y: '2013 Q2', item1: 8432, item2: 5713 }
-//    ],
-//    xkey      : 'y',
-//    ykeys     : ['item1', 'item2'],
-//    labels    : ['Item 1', 'Item 2'],
-//    lineColors: ['#a0d0e0', '#3c8dbc'],
-//    hideHover : 'auto'
-//  });
+  var area = new Morris.Area({
+    element   : 'revenue-chart',
+    resize    : true,
+    data      : [
+      { y: '2011 Q1', item1: 2666, item2: 2666 },
+      { y: '2011 Q2', item1: 2778, item2: 2294 },
+      { y: '2011 Q3', item1: 4912, item2: 1969 },
+      { y: '2011 Q4', item1: 3767, item2: 3597 },
+      { y: '2012 Q1', item1: 6810, item2: 1914 },
+      { y: '2012 Q2', item1: 5670, item2: 4293 },
+      { y: '2012 Q3', item1: 4820, item2: 3795 },
+      { y: '2012 Q4', item1: 15073, item2: 5967 },
+      { y: '2013 Q1', item1: 10687, item2: 4460 },
+      { y: '2013 Q2', item1: 8432, item2: 5713 }
+    ],
+    xkey      : 'y',
+    ykeys     : ['item1', 'item2'],
+    labels    : ['Item 1', 'Item 2'],
+    lineColors: ['#a0d0e0', '#3c8dbc'],
+    hideHover : 'auto'
+  });
 //  var line = new Morris.Line({
 //    element          : 'line-chart',
 //    resize           : true,

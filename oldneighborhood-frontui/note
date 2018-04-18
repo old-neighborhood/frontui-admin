@@ -4,3 +4,6 @@ http://www.infoq.com/cn/articles/Next-Generation-Session-Management-with-Spring-
 	将Spring Session的jar文件添加到web应用中
 	将Spring Session filter添加到web应用的配置中
 	配置Spring Session如何选择session数据存储的连接
+
+1.有效代码行不得少于2000
+2.
