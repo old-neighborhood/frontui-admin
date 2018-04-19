@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SiteController {
 
-	// admin管理员信息
 	@RequestMapping("/spot")
 	public String spotlist(ModelMap map, HttpSession session) {
 		// User user = (User) session.getAttribute("user");
@@ -27,7 +26,15 @@ public class SiteController {
 		// }
 		return "/site/addspot";
 	}
-	
+
+	@RequestMapping("/spotdetail")
+	public String spotde(ModelMap map, HttpSession session) {
+		// User user = (User) session.getAttribute("user");
+		// if (user == null) {
+		// return "/login";
+		// }
+		return "/site/spotdetail";
+	}
 
 
 }

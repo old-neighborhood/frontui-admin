@@ -3,6 +3,36 @@
  */
 
 $().ready(function() {
+	
+	//Timepicker
+    $('#endtime').timepicker({
+      showInputs: false
+    })
+    
+    $('#starttime').timepicker({
+      showInputs: true
+    })
+    
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+    
+    
+    var map = new AMap.Map("container", {
+		mapStyle : 'amap://styles/b7df64526165ef157ce1d22816e373c1',//样式URL
+		resizeEnable : true,
+		zoom : 11,
+		center : [ 116.397428, 39.90923 ],
+	});
+     /* AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.OverView'],
+    		    function(){
+    		        map.addControl(new AMap.ToolBar());
+
+    		        map.addControl(new AMap.Scale());
+
+    		        map.addControl(new AMap.OverView({isOpen:true}));
+      });*/
+	
+	
       $("#add").click(function(){
   		var site_name = $("#site_name").val();
   		var site_type = $("#site_type").val();
@@ -32,7 +62,7 @@ $().ready(function() {
   				}else if(status == "success") {
   					toastr.success("新建成功！");
   					setTimeout(function(){
-  						window.location = "spot";
+  						window.location = "spotdetail";
   					},1000);
   				}
               },error:function() {
