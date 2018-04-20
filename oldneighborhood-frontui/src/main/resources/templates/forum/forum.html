@@ -188,11 +188,11 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>公告板
+      <h1>论坛版块
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">announcement</a></li>
+        <li><a href="#">forum</a></li>
         <li class="active">board</li>
       </ol>
     </section>
@@ -200,11 +200,10 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-lg-2">
-          <a href="createannouncement" class="btn btn-primary btn-block margin-bottom">编辑公告</a>
+        <div class="col-lg-3">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">选项</h3>
+              <h3 class="box-title">列表</h3>
 
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -213,208 +212,200 @@
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="announce"><i class="fa fa-file-text-o"></i> 列表
+                <li><a href="announcement"><i class="fa fa-arrow-up"></i> 默认日期排序
                   <span id="announce_count" class="label label-primary pull-right">50</span></a></li>
-                <li><a href="#"><i class="fa fa-bookmark-o"></i> 置顶公告
+                <li><a href="#"><i class="fa fa-arrow-down"></i> 倒序
                   <span id="announce_count" class="label label-primary pull-right">10</span></a></li>
-                <li><a href="#"><i class="fa fa-eye"></i> 浏览量排序</a></li>
+                <li><a href="#"><i class="fa fa-eye"></i> 热度排</a></li>
               </ul>
             </div>
             <!-- /.box-body -->
           </div>
-          <!-- /. box -->
+          <!-- /. box --> 
         </div>
-        <div class="col-lg-10">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">公告详情</h3>
+        <div class="col-lg-9">
+        
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Tab 1</a></li>
+              <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Tab 2</a></li>
+              <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Tab 3</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  Dropdown <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                  <li role="presentation" class="divider"></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                </ul>
+              </li>
+              <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                <b>How to use:</b>
+
+                <p>Exactly like the original bootstrap tabs except you should use
+                  the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
+                A wonderful serenity has taken possession of my entire soul,
+                like these sweet mornings of spring which I enjoy with my whole heart.
+                I am alone, and feel the charm of existence in this spot,
+                which was created for the bliss of souls like mine. I am so happy,
+                my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
+                that I neglect my talents. I should be incapable of drawing a single stroke
+                at the present moment; and yet I feel that I never was a greater artist than now.
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2">
+                The European languages are members of the same family. Their separate existence is a myth.
+                For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
+                in their grammar, their pronunciation and their most common words. Everyone realizes why a
+                new common language would be desirable: one could refuse to pay expensive translators. To
+                achieve this, it would be necessary to have uniform grammar, pronunciation and more common
+                words. If several languages coalesce, the grammar of the resulting language is more simple
+                and regular than that of the individual languages.
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_3">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                It has survived not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                like Aldus PageMaker including versions of Lorem Ipsum.
+              </div>
+              <!-- /.tab-pane -->
             </div>
-            <!-- /.box-header -->
+            <!-- /.tab-content -->
+          </div>
+        
+        
+        
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#datesort" data-toggle="tab">Activity</a></li>
+              <li><a href="#reversesort" data-toggle="tab">Timeline</a></li>
+              <li><a href="#hotsort" data-toggle="tab">Settings</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="activity">
+              
+                <!-- Post -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="dist/img/user1-128x128.jpg" alt="user image" />
+                        <span class="username">
+                          <a href="#">Jonathan Burke Jr.</a>
+                        </span>
+                    <span class="description">Shared publicly - 7:30 PM today</span>
+                  </div>
+                  <!-- /.user-block -->
+                  <p>
+                    HEllO,WORLD!
+                  </p>
+                  <ul class="list-inline">
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                    </li>
+                    <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        (5)</a></li>
+                  </ul>
+                </div>
+                <!-- /.post -->
+                <!-- Post -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="dist/img/user6-128x128.jpg" alt="User Image" />
+                        <span class="username">
+                          <a href="#">Adam Jones</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                    <span class="description">Posted 5 photos - 5 days ago</span>
+                  </div>
+                  <!-- /.user-block -->
+                  <div class="row margin-bottom">
+                    <div class="col-sm-6">
+                      <img class="img-responsive" src="dist/img/photo1.png" alt="Photo" />
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img class="img-responsive" src="dist/img/photo2.png" alt="Photo" />
+                          <br />
+                          <img class="img-responsive" src="dist/img/photo3.jpg" alt="Photo" />
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                          <img class="img-responsive" src="dist/img/photo4.jpg" alt="Photo" />
+                          <br />
+                          <img class="img-responsive" src="dist/img/photo1.png" alt="Photo" />
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <ul class="list-inline">
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                    </li>
+                    <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        (5)</a></li>
+                  </ul>
+                </div>
+                <!-- /.post -->
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="timeline">
+              </div>
+              <!-- /.tab-pane -->
+
+            </div>
+            <!-- /.tab-content -->
+            
             <div class="box-body">
               <div class="table-responsive">
-              <table id="annoucetable" class="table table-bordered table-striped">
+                
+              </div>
+              
+            </div>
+            <div class="box-body">
+              <div class="table-responsive">
+              <!-- <table id="annoucetable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th hidden="hidden" id="annoucement_id"></th>
-                  <th style="width:30%">标题</th>
-                  <th style="width:50%">内容</th>
-                  <th style="width:10%">作者</th>
                   <th style="width:10%">日期</th>
+                  <th style="width:25%">主题帖</th>
+                  <th style="width:45%">内容</th>
+                  <th style="width:10%">作者</th>
+                  <th style="width:10%">浏览量</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                   <td hidden="hidden">00001</td>
+                  <td>2018-04-19</td>
                   <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
+                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下.................
                   </td>
                   <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
-                </tr>
-                <tr>
-                  <td hidden="hidden">00001</td>
-                  <td><a>[置顶] 老门东老街坊网站试运营</a></td>
-                  <td>老门东是明朝时候......的地方，现在作为老街坊，在政府的大力支持下...........................
-                  </td>
-                  <td>Bryan</td>
-                  <td>2018-04-19</td>
+                  <td>1000</td>
                 </tr>
                 </tbody>
-                <!-- <tfoot>
-                </tfoot> -->
-              </table>
+                <tfoot>
+                </tfoot>
+              </table> -->
             </div>
             </div>
             <!-- /.box-body -->
@@ -502,8 +493,18 @@
 <!-- <script src="dist/js/pages/dashboard.js"></script> -->
 <script type="text/javascript">
 $(function () {
-	    $('#annoucetable').DataTable()
-	  })
+	
+	
+	$('#annoucetable').DataTable()
+	$("#post_deal").DataTable({
+		'paging' : true,
+		'lengthChange' : false,
+		'searching' : false,
+		'ordering' : false,
+		'info' : false,
+		'autoWidth' : false
+	})
+})
 </script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
