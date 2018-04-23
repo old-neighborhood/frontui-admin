@@ -69,8 +69,13 @@
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
-            <label for="agree">我同意<a href="agree" target="_blank">协议</a></label>
+            <label for="agree">我同意<a href="#agreement" data-toggle="modal">协议</a></label>
             <input id="agree" name="agree" type="checkbox" class="form-control" /> 
+            
+            <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                Launch Default Modal
+              </button> -->
+            
             
           </div>
         </div>
@@ -80,6 +85,32 @@
         </div>
         <!-- /.col -->
       </div>
+      
+      <div class="modal fade in" id="agreement" style="display:none; padding-right: 17px;">
+          <div class="modal-dialog" style="width:400px">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button> -->
+                <h4 class="modal-title">老街坊网站服务协议</h4>
+              </div>
+              <div class="modal-body" style="height:450px; overflow:auto;">
+				<p>1) 本网站会保护用户的注册信息；</p>
+				<p>2) 用户需要遵守PRC法律法规，不得发布敏感内容；</p>
+				<p>3) ......</p>
+				<p>4)</p>
+				<p>4)</p>
+				<p>4)</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">我已知晓</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+      
     </form>
 
     <!-- <div class="social-auth-links text-center">

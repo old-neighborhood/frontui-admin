@@ -7,3 +7,21 @@ http://www.infoq.com/cn/articles/Next-Generation-Session-Management-with-Spring-
 
 1.有效代码行不得少于2000
 2.
+判断客户端是PC还是移动设备
+
+function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+ 
+var flag = IsPC();

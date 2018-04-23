@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ForumController {
 	
-	@RequestMapping("/forums")
+	@RequestMapping("/forum")
 	public String forums(ModelMap map, HttpSession session) {
 		// User user = (User) session.getAttribute("user");
 		// if (user == null) {
 		// return "/login";
 		// }
-		return "/forum/forums";
+		return "/forum/forum";
 	}
 	
-	@RequestMapping("/forum")
+	@RequestMapping("/posts")
 	public String forum(ModelMap map, HttpSession session) {
 		// User user = (User) session.getAttribute("user");
 		// if (user == null) {
 		// return "/login";
 		// }
-		return "/forum/forum";
+		return "/forum/posts";
 	}
 
 }
