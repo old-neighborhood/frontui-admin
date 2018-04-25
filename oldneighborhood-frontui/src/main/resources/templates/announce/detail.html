@@ -201,10 +201,10 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-      	<div class="col-md-2">
+      	<!-- <div class="col-md-2">
 		  <a href="modifyannoucement" class="btn btn-primary btn-block margin-bottom">编辑公告</a>
-          <!-- <a href="stick" class="btn btn-primary btn-block margin-bottom">置顶</a>
-          <a href="deleteannoucement" class="btn btn-primary btn-block margin-bottom">删除公告</a> -->
+          <a href="stick" class="btn btn-primary btn-block margin-bottom">置顶</a>
+          <a href="deleteannoucement" class="btn btn-primary btn-block margin-bottom">删除公告</a>
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">选项</h3>
@@ -223,19 +223,22 @@
                 <li><a href="#"><i class="fa fa-eye"></i> 浏览量排序</a></li>
               </ul>
             </div>
-            <!-- /.box-body -->
+            /.box-body
           </div>
           
-          <!-- /. box -->
-        </div>
-        <div class="col-lg-10">
+          /. box
+        </div> -->
+        <div class="col-lg-12">
           <div class="box box-primary">
+          	<!-- 记录公告ID -->
+          	<label hidden="hidden" id="announce_id"></label>
             <!--  box header -->
             <div class="box-header with-border">
               <div class="mailbox-controls">
                   <button name="stick" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-container="body" title="置顶">
-                  	<i class="fa fa-print"></i> 置顶
+                  	<i class="fa fa-print"></i> 置顶/取消置顶
                   </button>
+                  <a href="modifyannoucement" class="btn btn-primary btn-sm">编辑公告</a>
               	  <!-- <button type="button" class="btn btn-success"><i class="fa fa-print"></i> 打印</button> -->
               	  <button name="delete" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-container="body" title="删除">
               	  	<i class="fa fa-trash-o"></i> 删除
@@ -268,6 +271,7 @@
                 <button type="button" class="btn btn-default">下一篇 <i class="fa fa-chevron-right"></i></button>
               </div>
               <button name="stick" type="button" class="btn btn-primary"><i class="fa fa-print"></i> 置顶</button>
+              <a href="modifyannoucement" class="btn btn-primary">编辑公告</a>
               <!-- <button type="button" class="btn btn-success"><i class="fa fa-print"></i> 打印</button> -->
               <button name="delete" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> 删除</button>
             </div>

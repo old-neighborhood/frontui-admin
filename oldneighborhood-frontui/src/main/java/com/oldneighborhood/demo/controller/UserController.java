@@ -79,6 +79,7 @@ public class UserController {
 //		if (user == null) {
 //			return "/login";
 //		}
+		
 		return "/info";
 	}
 

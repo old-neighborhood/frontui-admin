@@ -1,10 +1,15 @@
 package com.oldneighborhood.demo.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class AnnounceController {
@@ -36,13 +41,28 @@ public class AnnounceController {
 		return "/announce/modify";
 	}
 	
-	@RequestMapping("/announcedetail")
-	public String detail(ModelMap map, HttpSession session) {
+	
+	@RequestMapping("/announceDetail")
+	@ResponseBody
+	public String detail(HttpSession session) {
 		// User user = (User) session.getAttribute("user");
 		// if (user == null) {
 		// return "/login";
 		// }
-		return "/announce/detail";
+		String url="http://localhost:8083/oldneighborhood/announcement/announcedetail";
+		Integer announce_ID = Integer.parseInt(session.getAttribute("announcement_ID").toString());
+		RestTemplate rs = new RestTemplate();
+		Map<String, Object> postData = new HashMap<String, Object>();
+		postData.put("a_ID", announce_ID);
+		String res = rs.postForObject(url, postData, String.class);
+		return res;
+	}
+	
+	@RequestMapping("/setAnnouncementID")
+	public String detail(String announcement_ID, HttpSession session) {
+		
+		session.setAttribute("announcement_ID", announcement_ID);
+		return "{\"result\":\"success\"}";
 	}
 	
 
