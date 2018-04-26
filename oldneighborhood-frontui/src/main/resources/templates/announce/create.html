@@ -216,7 +216,7 @@
                   </div>
                   <div class="col-md-6">
                   <label for="announce_author">作者</label>
-                  <input type="text" class="form-control" id="announce_author" placeholder="你的大名" />
+                  <input type="text" class="form-control" id="announce_author" placeholder="作者大名" />
                   </div>
                   </div>
               </div>
@@ -226,14 +226,14 @@
             <div class="box-body pad">
               <form>
               	<label for="announce_text">公告内容</label>
-                <textarea id="announce_text" class="textarea" placeholder="请输入内容......"
+                <textarea id="announce_text" class="textarea" placeholder="请输入内容......" required="required"
                           style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
                 </textarea>
               </form>
             </div>
             <div class="box-footer">
               <div>
-                <button type="button" class="btn btn-default"><i class="fa fa-undo"></i> 取消</button>
+                <button id="cancel" type="button" class="btn btn-default"><i class="fa fa-undo"></i> 取消</button>
                 <button id="create" type="button" class="btn btn-primary"><i class="fa fa-send"></i> 发布</button>
               </div>
             </div>

@@ -20,7 +20,8 @@ $().ready(function() {
         		announce += '<tbody>'
         		for (var i = 0; i < data.length; i++) {
         			var one = '<tr><td name="id" hidden="hidden">'+ data[i].a_ID +'</td>' +
-        				'<td><a href="/announcedetail?announce_id="'+ data[i].a_ID +' name="title">'+ data[i].a_title + '</a></td>' +
+//        				'<td><a href="/announcedetail?announce_id="'+ data[i].a_ID +' name="title">'+ data[i].a_title + '</a></td>' +
+        				'<td><a href="#" name="title">'+ data[i].a_title + '</a></td>' +
         				'<td>' + data[i].a_content.sbustr(0,30) + '......</td>' + 
         				'<td>' + data[i].a_author + '</td>'+
         				'<td>' + data[i].a_date + '</td></tr>';
@@ -39,7 +40,18 @@ $().ready(function() {
 	
 	$(document).on('click','[name="title"]',function(e){
 		var id = $(this).parent().parent().find('td:first').text();
+		var prev_id = $(this).parent().parent().prev().find('td:first').text();
+		var next_id = $(this).parent().parent().next().find('td:first').text();
 		console.log(id);
+//		console.log("<"+prev_id+">");
+//		console.log(">"+next_id+"<");
+		//上下篇为空
+		if (prev_id=="") {
+			prev_id="-1";
+		}
+		if (next_id=="") {
+			next_id="-1";
+		}
 		
 		$.ajax({
 			async: false,
@@ -49,7 +61,9 @@ $().ready(function() {
 		    //获取单个公告
 		    url: "setAnnouncementID",
 		    data:{
-	        	"a_ID":id
+	        	"a_ID":id,
+//	        	"prev_ID":prev_ID,
+//	        	"next_ID":next_ID
 	        }, 
 		    timeout: 5000,
 		    success:function(data){
@@ -59,9 +73,9 @@ $().ready(function() {
 		    },error:function(e){
 		    	toastr.error("请求失败！");
 		    }
-		})
+		});
 		
 		
-	})
+	});
 	
 })

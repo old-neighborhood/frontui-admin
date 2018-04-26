@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import net.sf.json.JSONObject;
+
 @Controller
 public class AnnounceController {
 	//公告列表
@@ -41,6 +43,14 @@ public class AnnounceController {
 		return "/announce/modify";
 	}
 	
+	@RequestMapping("/announcedetail")
+	public String detail0(ModelMap map, HttpSession session) {
+		// User user = (User) session.getAttribute("user");
+		// if (user == null) {
+		// return "/login";
+		// }
+		return "/announce/detail";
+	}
 	
 	@RequestMapping("/announceDetail")
 	@ResponseBody
@@ -55,15 +65,22 @@ public class AnnounceController {
 		Map<String, Object> postData = new HashMap<String, Object>();
 		postData.put("a_ID", announce_ID);
 		String res = rs.postForObject(url, postData, String.class);
+//		JSONObject json = JSONObject.fromObject(res);
+//		session.setAttribute("announce", json.toString());
 		return res;
 	}
 	
+	/**
+	 * @Title: detail 
+	 * @Description: 使用session存储当前公告的ID
+	 */
 	@RequestMapping("/setAnnouncementID")
 	public String detail(String announcement_ID, HttpSession session) {
 		
 		session.setAttribute("announcement_ID", announcement_ID);
 		return "{\"result\":\"success\"}";
 	}
+	
 	
 
 }
