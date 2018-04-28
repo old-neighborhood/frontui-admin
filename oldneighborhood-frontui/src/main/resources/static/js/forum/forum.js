@@ -21,7 +21,7 @@ $().ready(function() {
                 '<th style="width:10%">作者</th>'+
                 '<th style="width:10%">浏览量</th></tr></thead>';
         	if (data!=null) {
-        		forum += '<tbody>'
+        		forum += '<tbody>';
         		for (var i = 0; i < data.length; i++) {
         			
         			var one = '<tr><td name="id" hidden="hidden">'+ data[i].f_ID +'</td>' +
@@ -60,7 +60,7 @@ $().ready(function() {
                 '<th style="width:10%">作者</th>'+
                 '<th style="width:10%">浏览量</th></tr></thead>';
         	if (data!=null) {
-        		forum += '<tbody>'
+        		forum += '<tbody>';
         		for (var i = 0; i < data.length; i++) {
         			
         			var one = '<tr><td name="id" hidden="hidden">'+ data[i].f_ID +'</td>' +
@@ -98,7 +98,7 @@ $().ready(function() {
                 '<th style="width:10%">作者</th>'+
                 '<th style="width:10%">浏览量</th></tr></thead>';
         	if (data!=null) {
-        		forum += '<tbody>'
+        		forum += '<tbody>';
         		for (var i = 0; i < data.length; i++) {
         			
         			var one = '<tr><td name="id" hidden="hidden">'+ data[i].f_ID +'</td>' +

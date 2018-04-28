@@ -33,6 +33,11 @@
   
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+<style>
+	.contentImg{
+		width:50%;
+	}
+</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -200,7 +205,57 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-10">
+          <!-- 主题帖的内容 -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <div id="forum_title" class="user-block">
+                <img class="img-circle img-bordered-sm" src="dist/img/user1-128x128.jpg" alt="user image" />
+                <span class="username">
+                  <a href="#">呵呵</a>
+                </span>
+                <span class="description">2018-04-27 8:00</span>
+              </div>
+                  <!-- /.user-block -->
+              <div id="forum_content">
+                <p>#这个星期你做了啥？#
+                </p>
+                <img class="img-responsive contentImg" src="dist/img/photo1.png" alt="User profile picture" />
+              </div>
+              <br/>
+              <ul id="forum_addition" class="list-inline">
+                <li><i class="fa fa-share margin-r-5"></i> 分享</li>
+                <li><i class="fa fa-thumbs-o-up margin-r-5"></i> 喜欢</li>
+                <li><a href="#stick" ><i class="fa fa-bookmark margin-r-5"></i> 置顶该帖
+                </a></li>
+                <li><a href="#delete" style="color:red"><i class="fa fa-close margin-r-5"></i> 删除该帖
+                </a></li>
+              </ul> 
+              
+            </div>
+          </div>
+          
+          <!-- 回帖的弹窗 -->
+          <!-- <div class="modal fade in" id="reply" style="display:none; padding-right: 17px;">
+            <div class="modal-dialog" style="width:800px;margin-top:300px;">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">回帖</h4>
+                </div>
+                <div class="modal-body" style="height:200px; overflow:auto;">
+              	  <textarea id="reply_text" placeholder="请输入内容......"
+                          style="width: 100%; height: 95%; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                  </textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary">回帖</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- ./回帖弹窗 -->
+          
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">正序</a></li>
@@ -211,6 +266,26 @@
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
                 <!-- Post -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="dist/img/user1-128x128.jpg" alt="user image" />
+                        <span class="username">
+                          <a href="#">呵呵</a>
+                        </span>
+                    <span class="description">2018-04-27 8:00</span>
+                  </div>
+                  <!-- /.user-block -->
+                  <p>这个星期好烦！
+                  </p>
+                  <ul class="list-inline">
+                    <li><i class="fa fa-share margin-r-5"></i> 分享</li>
+                    <li><i class="fa fa-thumbs-o-up margin-r-5"></i> 喜欢</li>
+                    <li class="pull-right">
+                      <a href="#"><i class="fa fa-comments-o margin-r-5"></i> 展开评论
+                        </a></li>
+                  </ul>
+                </div>
+                <!-- /.post -->
                 <div class="post">
                   <div class="user-block">
                     <img class="img-circle img-bordered-sm" src="dist/img/user1-128x128.jpg" alt="user image" />
@@ -232,7 +307,27 @@
                         (5)</a></li>
                   </ul>
                 </div>
-                <!-- /.post -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="dist/img/user1-128x128.jpg" alt="user image" />
+                        <span class="username">
+                          <a href="#">Jonathan Burke Jr.</a>
+                        </span>
+                    <span class="description">Shared publicly - 7:30 PM today</span>
+                  </div>
+                  <!-- /.user-block -->
+                  <p>
+                    HEllO,WORLD!
+                  </p>
+                  <ul class="list-inline">
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                    </li>
+                    <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        (5)</a></li>
+                  </ul>
+                </div>
                 
                 <!-- Post -->
                 <div class="post">
