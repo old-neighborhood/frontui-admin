@@ -40,13 +40,13 @@ $().ready(function() {
     	console.log(name+passwd+usertype);
     	$.ajax({
     		//登录验证的应用
-            url: "/oldneighborhood/validation",
+            url: "/loginValidation",
             type: 'post',
             contentType:'application/json',
             data:JSON.stringify({
             	"username":name,
     			"password":passwd,
-    			"role":usertype
+    			"type":usertype
             }), 
             dataType:"json",
 			timeout:5000,
@@ -58,9 +58,9 @@ $().ready(function() {
                 	toastr.warning("用户名或密码不正确！");
 				}else if (status == "success") {
 					if (usertype=="user") {
-// window.location = "/student";
-					}else if (usertype=="saler"){
-// window.location = "/course";
+						window.location = "/user";
+					} else if (usertype == "saler") {
+						window.location = "/saler";
 					}else if (usertype=="admin"){
 						window.location="/index";
 					}

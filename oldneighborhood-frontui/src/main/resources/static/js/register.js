@@ -9,6 +9,10 @@ $().ready(function() {
                 minlength: 5,
             	maxlength: 32
             },
+            useremail:{
+            	required: true,
+            	email:true
+            },
             userpassword: {
                 required: true,
                 minlength: 5,
@@ -18,7 +22,6 @@ $().ready(function() {
                 required: true,
                 equalTo: "#userpassword"
             },
-            userphone: "required",
             usercode: "required"
         },
         messages: {
@@ -26,6 +29,10 @@ $().ready(function() {
                 required: "请输入用户名",
                 minlength: "不少于{0}个字符",
                 maxlength: "不大于{0}个字符"
+            },
+            useremail:{
+            	required: "请输入邮箱",
+            	email: "请检查邮箱是否有效"
             },
             userpassword: {
                 required: "请输入密码",
@@ -36,37 +43,39 @@ $().ready(function() {
                 required: "请再次输入密码",
                 equalTo: "两次密码不一样"
             },
-            userphone: "请输入有效手机号码",
             usercode: "请输入验证码"
         }
     });
     
     
-    
+    var validate = null;
     var sleep = 30, interval = null;
     window.onload = function () {
     	$("#getCode").click(function(){
-    		var userphone = $("#userphone").val();
-            var reg=/^[1][3,4,5,7,8][0-9]{9}$/;
-            if(userphone.length==0)
-                toastr.warning("请输入手机号码");
-            else if(!reg.test(userphone))
-                toastr.warning("请输入有效手机号码");
-            if (!interval && userphone.length!=0 && reg.test(userphone)){
-            	console.log(userphone);
+    		var useremail = $("#useremail").val();
+//            var reg=/^[1][3,4,5,7,8][0-9]{9}$/;
+//            if(userphone.length==0)
+//                toastr.warning("请输入手机号码");
+//            else if(!reg.test(userphone))
+//                toastr.warning("请输入有效手机号码");
+//    		if (!interval && userphone.length!=0 && reg.test(userphone)){
+    		
+            if (!interval){
+            	console.log(useremail);
                 $.ajax({
                 	type:"POST",
                 	contentType:'application/json',
                 	//获取验证码的url
-                	url:"/oldneighborhood/getCode",
+                	url:"/getCode",
                 	data:JSON.stringify({
                 		//手机验证码发送
-                		"userphone":userphone
+                		"email":useremail
                 	}),
                 	dataType:"json",
                 	success:function(data){
                 		console.log(data);
-                		toastr.info("请查看手机验证码");
+                		validate = data;
+                		toastr.info("请查看邮箱验证码");
     					
                 	}
                 })
@@ -91,7 +100,7 @@ $().ready(function() {
                         return false;
                     }
                     btn.value = "重新发送 (" + sleep-- + ")";
-                }, 1000);            
+                }, 300000);            
             }
     	});
     }
@@ -109,24 +118,24 @@ $().ready(function() {
     	}else{
     		var username = $("#username").val();
         	var userpassword = $("#userpassword").val();
-        	var usertele = $("#userphone").val();
+        	var useremail = $("#useremail").val();
         	var usercode = $("#usercode").val();
         	var type=$(':radio:checked').val();
 //        	console.log(username + "/" + userpassword + "/" + usertele + "/" + type);
         	//验证码验证
-        	//在前端实现不安全，需要在后端实现
         	$.ajax({
         		type:"POST",
         		contentType:'application/json',
         		//验证url
-        		url: "/oldneighborhood/validate",
+        		url: "/validatecode",
         		data:JSON.stringify({
         			//验证码验证模块
-        			"tele":usertele,
+        			"hash":validate.hash,
+        			"time":validate.time,
         			"code":usercode
         		}),
         		dataType:"json",
-        		timeout:15000,
+        		timeout:5000,
         		success: function(data){
         			console.log(data);
                     var status = data.result;
@@ -139,11 +148,11 @@ $().ready(function() {
         					$.ajax({
         						type:"POST",
         						contentType:'application/json',
-        						url: "/oldneighborhood/usersignup",
+        						url: "/usersignup",
         						data:JSON.stringify({
         							"username":username,
         							"password":userpassword,
-        							"tele":usertele
+        							"email":useremail
         						}),
         						dataType:"json",
         						timeout:15000,
@@ -169,11 +178,11 @@ $().ready(function() {
         						type:"POST",
         						contentType:'application/json',
         						//
-        						url: "/oldneighborhood/salersignup",
+        						url: "/salersignup",
         						data:JSON.stringify({
         							"username":username,
         							"password":userpassword,
-        							"tele":usertele
+        							"email":useremail
         						}),
         						dataType:"json",
         						timeout:15000,
@@ -185,7 +194,7 @@ $().ready(function() {
         							}else if (status == "success") {
         								toastr.success("注册成功！");
         								setTimeout(function(){
-//        									window.location = "/login";
+        									window.location = "/login";
         								},2000);
         							}
         						},
