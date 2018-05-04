@@ -66,7 +66,7 @@ $().ready(function() {
                 	type:"POST",
                 	contentType:'application/json',
                 	//获取验证码的url
-                	url:"/getCode",
+                	url:"/oldneighborhood/getCode",
                 	data:JSON.stringify({
                 		//手机验证码发送
                 		"email":useremail
