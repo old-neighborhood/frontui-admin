@@ -48,62 +48,98 @@ $().ready(function() {
     });
     
     
-    var validate = null;
-    var sleep = 30, interval = null;
-    window.onload = function () {
-    	$("#getCode").click(function(){
-    		var useremail = $("#useremail").val();
-//            var reg=/^[1][3,4,5,7,8][0-9]{9}$/;
-//            if(userphone.length==0)
-//                toastr.warning("请输入手机号码");
-//            else if(!reg.test(userphone))
-//                toastr.warning("请输入有效手机号码");
-//    		if (!interval && userphone.length!=0 && reg.test(userphone)){
-    		
-            if (!interval){
-            	console.log(useremail);
-                $.ajax({
-                	type:"POST",
-                	contentType:'application/json',
-                	//获取验证码的url
-                	url:"/oldneighborhood/getCode",
-                	data:JSON.stringify({
-                		//手机验证码发送
-                		"email":useremail
-                	}),
-                	dataType:"json",
-                	success:function(data){
-                		console.log(data);
-                		validate = data;
-                		toastr.info("请查看邮箱验证码");
-    					
-                	}
-                })
-                this.style.backgroundColor = 'rgb(243, 182, 182)';
-                this.disabled = "disabled";
-                this.style.cursor = "wait";
-                this.value = "重新发送 (" + sleep-- + ")";
-                interval = setInterval (function ()
-                {
-                    if (sleep == 0)
-                    {
-                        if (!!interval)
-                        {
-                            clearInterval (interval);
-                            interval = null;
-                            sleep = 30;
-                            btn.style.cursor = "pointer";
-                            btn.removeAttribute ('disabled');
-                            btn.value = "获取验证码";
-                            btn.style.backgroundColor = '';
-                        }
-                        return false;
-                    }
-                    btn.value = "重新发送 (" + sleep-- + ")";
-                }, 300000);            
-            }
-    	});
-    }
+    $("#getCode").click(function(){
+		var useremail = $("#useremail").val();
+		console.log(useremail);
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			// 获取验证码的url
+			url : "/oldneighborhood/getCode",
+			data : JSON.stringify({
+				// 手机验证码发送
+				"email" : useremail
+			}),
+			timeout: 5000,
+//			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				validate = data;
+				toastr.info("请查看邮箱验证码");
+//				禁用按钮
+			},error: function(error){
+				msg = error.responseJSON.message;
+//				console.log(msg);
+				if (msg.indexOf("554 DT:SPM") != -1) {
+					toastr.error("邮件可能被拦截或识别为垃圾邮件");
+				} else if(msg.indexOf("Read timed out") != -1) {
+					toastr.error("发送邮件响应超时");
+				} else {
+					toastr.error("发送邮件错误：可能被拦截或超时\n" + error.responseJSON.message);
+				}
+			}
+		});
+		//禁用获取验证码
+		$('#getCode').attr("disabled",true); 
+	});
+    
+    
+// var validate = null;
+// var sleep = 30, interval = null;
+// window.onload = function () {
+// $("#getCode").click(function(){
+//    		var useremail = $("#useremail").val();
+////            var reg=/^[1][3,4,5,7,8][0-9]{9}$/;
+////            if(userphone.length==0)
+////                toastr.warning("请输入手机号码");
+////            else if(!reg.test(userphone))
+////                toastr.warning("请输入有效手机号码");
+////    		if (!interval && userphone.length!=0 && reg.test(userphone)){
+//    		
+//            if (!interval){
+//            	console.log(useremail);
+//                $.ajax({
+//                	type:"POST",
+//                	contentType:'application/json',
+//                	//获取验证码的url
+//                	url:"/oldneighborhood/getCode",
+//                	data:JSON.stringify({
+//                		//手机验证码发送
+//                		"email":useremail
+//                	}),
+//                	dataType:"json",
+//                	success:function(data){
+//                		console.log(data);
+//                		validate = data;
+//                		toastr.info("请查看邮箱验证码");
+//    					
+//                	}
+//                });
+//                this.style.backgroundColor = 'rgb(243, 182, 182)';
+//                this.disabled = "disabled";
+//                this.style.cursor = "wait";
+//                this.value = "重新发送 (" + sleep-- + ")";
+//                interval = setInterval (function ()
+//                {
+//                    if (sleep == 0)
+//                    {
+//                        if (!!interval)
+//                        {
+//                            clearInterval (interval);
+//                            interval = null;
+//                            sleep = 30;
+//                            btn.style.cursor = "pointer";
+//                            btn.removeAttribute ('disabled');
+//                            btn.value = "获取验证码";
+//                            btn.style.backgroundColor = '';
+//                        }
+//                        return false;
+//                    }
+//                    btn.value = "重新发送 (" + sleep-- + ")";
+//                }, 300000);            
+//            }
+//    	});
+//    }
     
     
     $("#register").click(function(){

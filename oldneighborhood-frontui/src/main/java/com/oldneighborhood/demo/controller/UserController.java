@@ -71,6 +71,7 @@ public class UserController {
 	@RequestMapping("/getCode")
 	@ResponseBody
 	public String getCode(@RequestBody Map<String, Object> reqMap) {
+		System.out.println(reqMap);
 		String res = sendCodeService.sendCode(reqMap);
 		System.out.println(res);
 		return res;
