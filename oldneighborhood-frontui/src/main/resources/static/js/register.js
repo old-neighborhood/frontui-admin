@@ -2,6 +2,8 @@
  * Created by st0001 on 2017/12/13.
  */
 $().ready(function() {
+	var validate = null;
+	
     $("#register_form").validate({
         rules: {
         	username: {
@@ -61,26 +63,26 @@ $().ready(function() {
 				"email" : useremail
 			}),
 			timeout: 5000,
-//			dataType : "json",
+			dataType : "json",
 			success : function(data) {
-				console.log(data);
+//				validate = JSON.parse(data);
 				validate = data;
+				console.log(validate);
 				toastr.info("请查看邮箱验证码");
-//				禁用按钮
+				//发送成功后禁用验证按钮
+				$("#getCode").attr("disabled",true);
 			},error: function(error){
 				msg = error.responseJSON.message;
 //				console.log(msg);
 				if (msg.indexOf("554 DT:SPM") != -1) {
 					toastr.error("邮件可能被拦截或识别为垃圾邮件");
 				} else if(msg.indexOf("Read timed out") != -1) {
-					toastr.error("发送邮件响应超时");
+					toastr.error("发送邮件响应超时，请重试");
 				} else {
 					toastr.error("发送邮件错误：可能被拦截或超时\n" + error.responseJSON.message);
 				}
 			}
 		});
-		//禁用获取验证码
-		$('#getCode').attr("disabled",true); 
 	});
     
     
@@ -145,8 +147,6 @@ $().ready(function() {
     $("#register").click(function(){
     	var valid = $("#register_form").valid();
     	var agree = $("#agree").prop("checked");
-    	
-//    	console.log(valid+" "+agree);
     	if(!valid){
     		toastr.warning("检查输入！");
     	}else if(!agree){
@@ -157,13 +157,15 @@ $().ready(function() {
         	var useremail = $("#useremail").val();
         	var usercode = $("#usercode").val();
         	var type=$(':radio:checked').val();
-//        	console.log(username + "/" + userpassword + "/" + usertele + "/" + type);
+//        	console.log(username + "/" + userpassword + "/" + useremail + "/" + type);
         	//验证码验证
+//        	console.log("hash:" + validate.hash + "/time:" + validate.time + "/code:" + usercode);
+//        	console.log(validate);
         	$.ajax({
         		type:"POST",
         		contentType:'application/json',
         		//验证url
-        		url: "/validatecode",
+        		url: "/oldneighborhood/validatecode",
         		data:JSON.stringify({
         			//验证码验证模块
         			"hash":validate.hash,
@@ -172,11 +174,19 @@ $().ready(function() {
         		}),
         		dataType:"json",
         		timeout:5000,
-        		success: function(data){
-        			console.log(data);
-                    var status = data.result;
+        		error: function(error){
+        			msg = error.responseJSON.message;
+        			console.log(msg);
+        			toastr.error("验证失败！");
+        		},
+        		success: function(msg){
+        			console.log(msg);
+//        			var data = JSON.parse(msg);
+                    var status = msg.result;
                     if (status == "error") {
-        				toastr.error("验证失败！");
+        				toastr.error("验证码不正确");
+        			}else if (status == "overdue") {
+        				toastr.error("验证超时，请刷新重试");
         			}else if (status == "success") {
         				//验证成功后
         				if (type=="user") {
@@ -184,7 +194,7 @@ $().ready(function() {
         					$.ajax({
         						type:"POST",
         						contentType:'application/json',
-        						url: "/usersignup",
+        						url: "/oldneighborhood/usersignup",
         						data:JSON.stringify({
         							"username":username,
         							"password":userpassword,
@@ -192,15 +202,15 @@ $().ready(function() {
         						}),
         						dataType:"json",
         						timeout:15000,
-        						success: function(data){
-        							console.log(data);
-        				            var status = data.result;
+        						success: function(msg){
+        							console.log(msg);
+        				            var status = msg.result;
         				            if (status == "error") {
         								toastr.error("注册失败！");
         							}else if (status == "success") {
         								toastr.success("注册成功！");
         								setTimeout(function(){
-        									window.location = "/login";
+        									window.location = "/oldneighborhood/login";
         								},2000);
         							}
         						},
@@ -214,7 +224,7 @@ $().ready(function() {
         						type:"POST",
         						contentType:'application/json',
         						//
-        						url: "/salersignup",
+        						url: "/oldneighborhood/salersignup",
         						data:JSON.stringify({
         							"username":username,
         							"password":userpassword,
@@ -222,32 +232,31 @@ $().ready(function() {
         						}),
         						dataType:"json",
         						timeout:15000,
-        						success: function(data){
-        							console.log(data);
-        				            var status = data.result;
+        						success: function(msg){
+        							console.log(msg);
+        				            var status = msg.result;
         				            if (status == "error") {
         								toastr.error("注册失败！");
         							}else if (status == "success") {
         								toastr.success("注册成功！");
         								setTimeout(function(){
-        									window.location = "/login";
+        									window.location = "/oldneighborhood/login";
         								},2000);
         							}
         						},
-        						error:function(){
-        							console.log("回调失败！");
+        						error:function(e){
+        							console.log(e.responseJSON.message);
+        							toastr.error("回调失败！");
         						}
-        					})
+        					});
         				}
         				
         			}
         		} 
-        	})
-    		
+        	});
     	}
     	
     });
-    
     
 });
 

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @FeignClient(value="neighborhood-register-service")
 public interface RegisterService {
 	
-	@RequestMapping("/oldneighborhood/usersignup")
+	@RequestMapping("/register/usersignup")
 	public String usersignup(Map<String,Object> reqMap);
 	
-	@RequestMapping("/oldneighborhood/salersignup")
+	@RequestMapping("/register/salersignup")
 	public String salersignup(Map<String,Object> reqMap);
 }

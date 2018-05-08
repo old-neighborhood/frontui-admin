@@ -54,8 +54,10 @@ $().ready(function() {
                 		//手机验证码发送
                 		"email":useremail
                 	}),
+                	timeout: 5000,
                 	dataType:"json",
-                	success:function(data){
+                	success:function(msg){
+                		var data = JSON.parse(msg);
                 		console.log(data);
                 		validate = data;
                 		toastr.info("请查看邮箱验证码");
@@ -142,6 +144,7 @@ $().ready(function() {
 			dataType:"json",
 			timeout:5000,
 			success: function(data){
+//				var data = JSON.parse(msg);
 				console.log(data);
 	            var status = data.result;
 	            if (status == "error") {

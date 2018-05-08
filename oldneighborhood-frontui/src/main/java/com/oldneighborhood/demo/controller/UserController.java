@@ -27,11 +27,11 @@ public class UserController {
 		return "/index";
 	}
 	
-	@RequestMapping("/user")
-	public String userpage(ModelMap map) {
-		return "redirect:http://111.231.107.63:8080/";
-	}
-
+//	@RequestMapping("/saler")
+//	public String salerpage(ModelMap map) {
+//		return "redirect:http://192.168.48.134:8080/SalerIndex";
+//	}	
+	
 	// login
 	@RequestMapping("/login")
 	public String login(ModelMap map) {
@@ -92,6 +92,7 @@ public class UserController {
 	@ResponseBody
 	public String userSignUp(@RequestBody Map<String, Object> reqMap) {
 		String res = registerService.usersignup(reqMap);
+		System.out.println(res);
 		return res;
 	}
 	
@@ -99,6 +100,7 @@ public class UserController {
 	@ResponseBody
 	public String salerSignUp(@RequestBody Map<String, Object> reqMap) {
 		String res = registerService.salersignup(reqMap);
+		System.out.println(res);
 		return res;
 	}
 
@@ -116,6 +118,7 @@ public class UserController {
 			session.setAttribute("username", reqMap.get("username"));
 			session.setAttribute("usertype", json.get("type"));
 		}
+		System.out.println(res);
 		return res;
 	}
 	
