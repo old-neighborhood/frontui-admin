@@ -223,6 +223,15 @@
             </div>
             </form>
             <!-- /.box-body -->
+            <div class="box-body">
+	          <form id="upload_image" enctype="multipart/form-data" method="post">
+	            <label for="announce_image">上传题图（可选）</label>
+	            <input id="file" type="file" name="file" />
+	            <label style="font-size:10px">支持.png|.jpg|.jpeg|.ico等格式图片，图片大小请小于5MB</label>
+	            <br/>
+	            <button id="upload" type="button" class="btn btn-primary"> 上传</button>
+	          </form>
+            </div>
             <div class="box-body pad">
               <form>
               	<label for="announce_text">公告内容</label>
@@ -319,13 +328,8 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="dist/js/pages/dashboard.js"></script> -->
-<script type="text/javascript">
-$(function () {
-	    $('.textarea').wysihtml5()
-})
-</script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-
+<script src="js/announce/create.js"></script>
 </body>
 </html>

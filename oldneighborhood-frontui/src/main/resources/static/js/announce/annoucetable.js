@@ -74,8 +74,6 @@ $().ready(function() {
 		    	toastr.error("请求失败！");
 		    }
 		});
-		
-		
 	});
 	
 })
