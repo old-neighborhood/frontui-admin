@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 //import com.oldneighborhood.demo.entity.User;
-import com.oldneighborhood.demo.service.RegisterService;
-import com.oldneighborhood.demo.service.SendCodeService;
+import com.oldneighborhood.demo.service.CommonService;
 import com.oldneighborhood.demo.service.LoginService;
 
 import net.sf.json.JSONException;
@@ -66,13 +65,13 @@ public class UserController {
 	
 	//获取验证码与验证
 	@Autowired
-	private SendCodeService sendCodeService;
+	private CommonService commonService;
 	
 	@RequestMapping("/getCode")
 	@ResponseBody
 	public String getCode(@RequestBody Map<String, Object> reqMap) {
 		System.out.println(reqMap);
-		String res = sendCodeService.sendCode(reqMap);
+		String res = commonService.sendCode(reqMap);
 		System.out.println(res);
 		return res;
 	}
@@ -80,18 +79,14 @@ public class UserController {
 	@RequestMapping("/validatecode")
 	@ResponseBody
 	public String validateCode(@RequestBody Map<String, Object> reqMap) {
-		String res = sendCodeService.validateCode(reqMap);
+		String res = commonService.validateCode(reqMap);
 		return res;
 	}
-	
-	//注册
-	@Autowired
-	private RegisterService registerService;
 	
 	@RequestMapping("/usersignup")
 	@ResponseBody
 	public String userSignUp(@RequestBody Map<String, Object> reqMap) {
-		String res = registerService.usersignup(reqMap);
+		String res = commonService.usersignup(reqMap);
 		System.out.println(res);
 		return res;
 	}
@@ -99,7 +94,7 @@ public class UserController {
 	@RequestMapping("/salersignup")
 	@ResponseBody
 	public String salerSignUp(@RequestBody Map<String, Object> reqMap) {
-		String res = registerService.salersignup(reqMap);
+		String res = commonService.salersignup(reqMap);
 		System.out.println(res);
 		return res;
 	}
@@ -107,6 +102,7 @@ public class UserController {
 	//登录验证获取信息
 	@Autowired
 	private LoginService loginService;
+	
 	@RequestMapping("/loginValidation")
 	@ResponseBody
 	public String user(@RequestBody Map<String, Object> reqMap, HttpSession session)

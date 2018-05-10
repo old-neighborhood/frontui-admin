@@ -5,17 +5,25 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+
+import com.oldneighborhood.demo.service.ManagementService;
 
 //import net.sf.json.JSONObject;
 
 @Controller
 public class AnnounceController {
-	//公告列表
+	/**
+	 * 
+	 * @Title: list
+	 * @Description: 返回页面
+	 */
 	@RequestMapping("/announce")
 	public String list(ModelMap map, HttpSession session) {
 		// User user = (User) session.getAttribute("user");
@@ -82,5 +90,23 @@ public class AnnounceController {
 	}
 	
 	
+	/**
+	 * 以下是通过接口调用远程服务
+	 */
+	@Autowired
+	private ManagementService announcementService;
+	
+	@RequestMapping("/getlist")
+	@ResponseBody
+	public String getlist(@RequestBody Map<String, Object> reqMap) {
+		return announcementService.list(reqMap);
+	}
+	
+	@RequestMapping("/release")
+	@ResponseBody
+	public String release(@RequestBody Map<String, Object> reqMap, HttpSession session) {
+		System.out.println(reqMap);
+		return announcementService.release(reqMap);
+	}
 
 }
