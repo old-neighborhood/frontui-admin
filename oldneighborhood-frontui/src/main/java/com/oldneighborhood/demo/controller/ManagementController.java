@@ -18,12 +18,9 @@ import com.oldneighborhood.demo.service.ManagementService;
 //import net.sf.json.JSONObject;
 
 @Controller
-public class AnnounceController {
-	/**
-	 * 
-	 * @Title: list
-	 * @Description: 返回页面
-	 */
+public class ManagementController {
+	
+	//页面跳转部分
 	@RequestMapping("/announce")
 	public String list(ModelMap map, HttpSession session) {
 		// User user = (User) session.getAttribute("user");
@@ -60,35 +57,43 @@ public class AnnounceController {
 		return "/announce/detail";
 	}
 	
-	@RequestMapping("/announceDetail")
-	@ResponseBody
-	public String detail(HttpSession session) {
+	@RequestMapping("/spot")
+	public String spotlist(ModelMap map, HttpSession session) {
 		// User user = (User) session.getAttribute("user");
 		// if (user == null) {
 		// return "/login";
 		// }
-		String url="http://localhost:8083/oldneighborhood/announcement/announcedetail";
-		Integer announce_ID = Integer.parseInt(session.getAttribute("announcement_ID").toString());
-		RestTemplate rs = new RestTemplate();
-		Map<String, Object> postData = new HashMap<String, Object>();
-		postData.put("a_ID", announce_ID);
-		String res = rs.postForObject(url, postData, String.class);
-//		JSONObject json = JSONObject.fromObject(res);
-//		session.setAttribute("announce", json.toString());
-		return res;
+		return "/site/spot";
+	}
+	
+	@RequestMapping("/addspot")
+	public String addspot(ModelMap map, HttpSession session) {
+		// User user = (User) session.getAttribute("user");
+		// if (user == null) {
+		// return "/login";
+		// }
+		return "/site/addspot";
+	}
+
+	@RequestMapping("/spotdetail")
+	public String spotde(ModelMap map, HttpSession session) {
+		// User user = (User) session.getAttribute("user");
+		// if (user == null) {
+		// return "/login";
+		// }
+		return "/site/spotdetail";
 	}
 	
 	/**
-	 * @Title: detail 
+	 * @Title: setannoucement_ID 
 	 * @Description: 使用session存储当前公告的ID
 	 */
 	@RequestMapping("/setAnnouncementID")
-	public String detail(String announcement_ID, HttpSession session) {
+	public String setannoucement_ID(String announcement_ID, HttpSession session) {
 		
 		session.setAttribute("announcement_ID", announcement_ID);
 		return "{\"result\":\"success\"}";
 	}
-	
 	
 	/**
 	 * 以下是通过接口调用远程服务
@@ -108,5 +113,16 @@ public class AnnounceController {
 		System.out.println(reqMap);
 		return announcementService.release(reqMap);
 	}
+	
+	@RequestMapping("/announceDetail")
+	@ResponseBody
+	public String detail(HttpSession session) {
+		// User user = (User) session.getAttribute("user");
+		// if (user == null) {
+		// return "/login";
+		// }
+		return "";
+	}
+	
 
 }

@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.oldneighborhood</groupId>
-	<artifactId>oldneighborhood-frontui</artifactId>
+	<artifactId>oldneighborhood-oldneighborhood</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>oldneighborhood-frontui</name>
+	<name>oldneighborhood-oldneighborhood</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
