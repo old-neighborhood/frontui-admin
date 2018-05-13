@@ -17,8 +17,6 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
   <link href="css/toastr.css" rel="stylesheet" />
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
@@ -209,87 +207,6 @@
                 </tr>
                 </thead>
                 <tbody id="admintable">
-                <!-- <tbody th:each="admin :${admins}">
-                <tr>
-                  <td th:text="${admin.ad_id}" hidden="hidden"></td>
-                  <td th:text="${admin.ad_name}"></td>
-                  <td th:text="${admin.ad_password}"></td>
-                  <td th:text="((${#strings.indexOf(admin.ad_permission,0)}=='r')?'读':'读 &amp; 写')"></td>
-                  <td th:text="((${#strings.indexOf(admin.ad_permission,1)}=='r')?'读':'读 &amp; 写')"></td>
-                  <td th:text="((${#strings.indexOf(admin.ad_permission,2)}=='r')?'读':'读 &amp; 写')"></td>
-                  <td th:text="((${#strings.indexOf(admin.ad_permission,3)}=='r')?'读':'读 &amp; 写')"></td>
-                  <td th:text="((${#strings.indexOf(admin.ad_permission,4)}=='r')?'读':'读 &amp; 写')"></td>
-                  <td>
-                    <a href="|@{/admin/modify}/${admin.ad_id}|">修改</a>
-                    <span> | </span>
-                    <a href="|@{/admin/delete}/${admin.ad_id}|">删除</a>
-                  </td>
-                </tr> -->
-                <tr>
-                  <td hidden="hidden">000000000000000000000000000002</td>
-                  <td >Bryan</td>
-                  <td>******</td>
-                  <td>读 / 写</td>
-                  <td>读 / 写</td>
-                  <td>读 / 写</td>
-                  <td>读 / 写</td>
-                  <td>读 / 写</td>
-                  <td>
-                    <a href="#">修改</a>
-                    <span> | </span>
-                    <a href="delete">删除</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Mozilla 1.8</td>
-                  <td>Win 98+ / OSX.1+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Webkit</td>
-                  <td>Safari 1.2</td>
-                  <td>OSX.3</td>
-                  <td>125.5</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Presto</td>
-                  <td>Opera 7.0</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>-</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>KHTML</td>
-                  <td>Konqureror 3.3</td>
-                  <td>KDE 3.3</td>
-                  <td>3.3</td>
-                  <td>A</td>
-                </tr>
-                <tr>
-                  <td>Tasman</td>
-                  <td>Internet Explorer 4.5</td>
-                  <td>Mac OS 8-9</td>
-                  <td>-</td>
-                  <td>X</td>
-                </tr>
-                <tr>
-                  <td>Misc</td>
-                  <td>NetFront 3.1</td>
-                  <td>Embedded devices</td>
-                  <td>-</td>
-                  <td>C</td>
-                </tr>
-                <tr>
-                  <td>Other browsers</td>
-                  <td>All others</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>U</td>
-                </tr>
-                
                 </tbody>
                 <tfoot>
                 <tr>
@@ -352,10 +269,6 @@
 <!-- DataTables -->
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- Slimscroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
 <script src="js/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>

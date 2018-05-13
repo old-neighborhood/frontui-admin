@@ -28,6 +28,8 @@ public interface CommonService {
 	public String usersignup(Map<String, Object> reqMap);
 	@RequestMapping("/common/register/salersignup")
 	public String salersignup(Map<String, Object> reqMap);
+	@RequestMapping("/common/register/reset")
+	public String resetpassword(Map<String, Object> reqMap);
 
 	//file
 //	@RequestMapping("/common/file/fileupload")

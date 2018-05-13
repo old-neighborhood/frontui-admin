@@ -1,22 +1,27 @@
 package com.oldneighborhood.demo.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.oldneighborhood.demo.service.ConfigService;
+
 import net.sf.json.JSONObject;
 
 @Controller
-// @RequestMapping("/config")
 public class ConfigController {
 
 	// admin管理员信息
 	@RequestMapping("/admin")
-	public String admintable(ModelMap map, HttpSession session) {
+	public String admintable() {
 		// User user = (User) session.getAttribute("user");
 		// if (user == null) {
 		// return "/login";
@@ -26,7 +31,7 @@ public class ConfigController {
 
 	// admin管理员信息
 	@RequestMapping("/newadmin")
-	public String newadmin(ModelMap map, HttpSession session) {
+	public String newadmin() {
 		// User user = (User) session.getAttribute("user");
 		// if (user == null) {
 		// return "/login";
@@ -34,22 +39,31 @@ public class ConfigController {
 		return "/config/newadmin";
 	}
 
+	@Autowired
+	private ConfigService configService;
 	// admin管理员信息
 	@RequestMapping("/admin/all")
 	@ResponseBody
-	public String ALL() {
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://114.212.244.99:8087/oldneighborhood/admin/all";
-//		String request = "{\"ad_id\":" + ad_id + "}";
-		String res = restTemplate.postForObject(url, null, String.class);
-		System.out.println(res);
-		JSONObject json = JSONObject.fromObject(res);
-		if (json.getString("result").equals("success")) {
-			return "redirect:/config/admin";
-		}else {
-			return "";
-//			return Content("<script>alert('添加成功！');window.location.href='/client';</script>");
-		}
+	public String adminALl() {
+		return configService.alladmins();
+	}
+	
+	@RequestMapping("/admin/new")
+	@ResponseBody
+	public String adminNew(@RequestBody Map<String, Object> reqMap) {
+		return configService.newAdmin(reqMap);
+	}
+	
+	@RequestMapping("/admin/delete")
+	@ResponseBody
+	public String delAdmin(@RequestBody Map<String, Object> reqMap) {
+		return configService.delAdmin(reqMap);
+	}
+	
+	@RequestMapping("/admin/modify")
+	@ResponseBody
+	public String modifyAdmin(@RequestBody Map<String, Object> reqMap) {
+		return configService.modifyAdmin(reqMap);
 	}
 	
 }

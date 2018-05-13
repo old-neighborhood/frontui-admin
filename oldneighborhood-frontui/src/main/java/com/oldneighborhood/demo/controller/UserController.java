@@ -20,16 +20,11 @@ import net.sf.json.JSONObject;
 @Controller
 public class UserController {
 	// 默认页面
-	@RequestMapping(value = { "/", "/index" })
+	@RequestMapping(value = {"/index" })
 	public String index(ModelMap map) {
 		//检查是否有session
 		return "/index";
 	}
-	
-//	@RequestMapping("/saler")
-//	public String salerpage(ModelMap map) {
-//		return "redirect:http://192.168.48.134:8080/SalerIndex";
-//	}	
 	
 	// login
 	@RequestMapping("/login")
@@ -96,6 +91,13 @@ public class UserController {
 	public String salerSignUp(@RequestBody Map<String, Object> reqMap) {
 		String res = commonService.salersignup(reqMap);
 		System.out.println(res);
+		return res;
+	}
+	
+	@RequestMapping("/resetpassword")
+	@ResponseBody
+	public String resetpassword(@RequestBody Map<String, Object> reqMap){
+		String res = commonService.resetpassword(reqMap);
 		return res;
 	}
 

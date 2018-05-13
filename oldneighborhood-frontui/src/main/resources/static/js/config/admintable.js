@@ -7,7 +7,7 @@ $().ready(function() {
 	var data = null;
 	$.ajax({
 		//
-        url: "http://localhost:8087/oldneighborhood/admin/all",
+        url: "/admin/admin/all",
         type: 'post',
         contentType:'application/json',
         dataType:"json",
@@ -57,7 +57,7 @@ $().ready(function() {
 		    type: "POST",
 		    contentType:'application/json',
 		    dataType: 'json',
-		    url: "http://localhost:8087/oldneighborhood/admin/delete",
+		    url: "/admin/admin/delete",
 		    data:JSON.stringify({
             	"ad_ID":id
             }), 
@@ -104,14 +104,15 @@ $().ready(function() {
 		console.log(ad_permission);
 		
 		$.ajax({
-		      url:"http://localhost:8087/oldneighborhood/admin/modify",
+		      url:"/admin/admin/modify",
 		      type:"POST",
 		      contentType:'application/json',
 		      data:JSON.stringify({
 		    	  "ad_ID":ad_ID,
 			      "ad_name":ad_name,
 			      "ad_password":ad_password,
-			      "ad_permission":ad_permission
+			      "ad_permission":ad_permission,
+			      "ad_image":"http://111.231.107.63:8085/common/554c8d43389748f4a73bae0cad5cb4d7.png"
 	            }), 
 		      datatype:"json",
 		      success:function (msg) {

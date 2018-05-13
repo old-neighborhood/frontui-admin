@@ -3,13 +3,21 @@ package com.oldneighborhood.demo.service;
 import java.util.Map;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient(value = "neighborhood-config-service")
 public interface ConfigService {
 	//admin
 	@RequestMapping(value="/config/admin/all")
-	public String alladmins(Map<String,Object> reqMap);
+	public String alladmins();
+	@RequestMapping("/config/admin/new")
+	public String newAdmin(@RequestBody Map<String, Object> reqMap);
+	@RequestMapping("/config/admin/delete")
+	public String delAdmin(@RequestBody Map<String, Object> reqMap);
+	@RequestMapping("/config/admin/mofify")
+	public String modifyAdmin(@RequestBody Map<String, Object> reqMap);
+	
 	//api
 	@RequestMapping(value="/config/api/all")
 	public String allapis(Map<String, Object> reqMap);

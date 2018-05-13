@@ -57,7 +57,7 @@ $().ready(function() {
 			type : "POST",
 			contentType : "application/json",
 			// 获取验证码的url
-			url : "/oldneighborhood/getCode",
+			url : "/admin/getCode",
 			data : JSON.stringify({
 				// 手机验证码发送
 				"email" : useremail
@@ -165,7 +165,7 @@ $().ready(function() {
         		type:"POST",
         		contentType:'application/json',
         		//验证url
-        		url: "/oldneighborhood/validatecode",
+        		url: "/admin/validatecode",
         		data:JSON.stringify({
         			//验证码验证模块
         			"hash":validate.hash,
@@ -194,7 +194,7 @@ $().ready(function() {
         					$.ajax({
         						type:"POST",
         						contentType:'application/json',
-        						url: "/oldneighborhood/usersignup",
+        						url: "/admin/usersignup",
         						data:JSON.stringify({
         							"username":username,
         							"password":userpassword,
@@ -210,7 +210,7 @@ $().ready(function() {
         							}else if (status == "success") {
         								toastr.success("注册成功！");
         								setTimeout(function(){
-        									window.location = "/oldneighborhood/login";
+        									window.location = "/admin/login";
         								},2000);
         							}
         						},
@@ -224,7 +224,7 @@ $().ready(function() {
         						type:"POST",
         						contentType:'application/json',
         						//
-        						url: "/oldneighborhood/salersignup",
+        						url: "/admin/salersignup",
         						data:JSON.stringify({
         							"username":username,
         							"password":userpassword,
@@ -240,7 +240,7 @@ $().ready(function() {
         							}else if (status == "success") {
         								toastr.success("注册成功！");
         								setTimeout(function(){
-        									window.location = "/oldneighborhood/login";
+        									window.location = "/admin/login";
         								},2000);
         							}
         						},
