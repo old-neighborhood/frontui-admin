@@ -115,8 +115,8 @@ $().ready(function() {
 			      "ad_image":"http://111.231.107.63:8085/common/554c8d43389748f4a73bae0cad5cb4d7.png"
 	            }), 
 		      datatype:"json",
-		      success:function (msg) {
-		    	  var data = JSON.parse(msg);
+		      success:function (data) {
+//		    	  var data = JSON.parse(msg);
 		    	  if (data.result == "success") {
 		    		  window.location="admin";
 		    	  }else {
