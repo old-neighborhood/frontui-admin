@@ -1,4 +1,29 @@
 $().ready(function() {
+	var E = window.wangEditor
+    var editor = new E('#editor')
+    editor.customConfig.menus = [
+    	'head',  // 标题
+        'bold',  // 粗体
+        'fontSize',  // 字号
+        'fontName',  // 字体
+        'italic',  // 斜体
+        'underline',  // 下划线
+        'strikeThrough',  // 删除线
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'link',  // 插入链接
+        'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'image',  // 插入图片
+        'video',  // 插入视频
+        'undo',  // 撤销
+        'redo'  // 重复
+    ]
+    editor.customConfig.uploadImgShowBase64 = true
+    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024
+//    editor.customConfig.uploadImgServer = 'http://111.231.107.63:8085/common/file/fileupload'
+    editor.create()
 	
 	$("#create").click(function(){
 		var a_name = $("#announce_name").val();
@@ -25,7 +50,7 @@ $().ready(function() {
 				}else if(status == "success") {
 					toastr.success("发布成功！");
 					setTimeout(function(){
-						window.location = "announce/announcement";
+						window.location = "/admin/announce";
 					},1000);
 				}
             },error:function() {
@@ -35,8 +60,7 @@ $().ready(function() {
 	});
 	
 	$("#cancel").click(function(){
-		window.location = "announce/announcement";
+		window.location = "/admin/announce";
 	})
-	
 	
 })

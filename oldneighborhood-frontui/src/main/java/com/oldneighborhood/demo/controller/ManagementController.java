@@ -11,7 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 
 import com.oldneighborhood.demo.service.ManagementService;
 
@@ -19,6 +19,15 @@ import com.oldneighborhood.demo.service.ManagementService;
 
 @Controller
 public class ManagementController {
+	
+	@RequestMapping("/market")
+	public String market(ModelMap map, HttpSession session) {
+		// User user = (User) session.getAttribute("user");
+		// if (user == null) {
+		// return "/login";
+		// }
+		return "/site/market";
+	}
 	
 	//页面跳转部分
 	@RequestMapping("/announce")
@@ -89,9 +98,12 @@ public class ManagementController {
 	 * @Description: 使用session存储当前公告的ID
 	 */
 	@RequestMapping("/setAnnouncementID")
-	public String setannoucement_ID(String announcement_ID, HttpSession session) {
-		
-		session.setAttribute("announcement_ID", announcement_ID);
+	public @ResponseBody String setannoucement_ID(@RequestBody Map<String,Object> map, HttpSession session) {
+		String a_ID = map.get("a_ID").toString();
+		String prev_ID = map.get("prev_ID").toString();
+		String next_ID = map.get("next_ID").toString();
+		System.out.println("Announcement_ID - > " + a_ID + "<" + prev_ID + ">" + next_ID);
+		session.setAttribute("announcement_ID", a_ID);
 		return "{\"result\":\"success\"}";
 	}
 	
@@ -101,10 +113,15 @@ public class ManagementController {
 	@Autowired
 	private ManagementService announcementService;
 	
-	@RequestMapping("/getlist")
+	@RequestMapping("/getAnnouncementList")
 	@ResponseBody
-	public String getlist(@RequestBody Map<String, Object> reqMap) {
-		return announcementService.list(reqMap);
+	public String getlist() {
+		return announcementService.list();
+	}
+	@RequestMapping("/getStickyList")
+	@ResponseBody
+	public String getStickylist() {
+		return announcementService.listSticky();
 	}
 	
 	@RequestMapping("/release")
@@ -117,11 +134,41 @@ public class ManagementController {
 	@RequestMapping("/announceDetail")
 	@ResponseBody
 	public String detail(HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
-		return "";
+		String a_ID = (String) session.getAttribute("announcement_ID");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("a_ID", a_ID);
+		System.out.println(announcementService.detail(map));
+		return announcementService.detail(map);
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String deleteAnn(HttpSession session) {
+		String a_ID = (String) session.getAttribute("announcement_ID");
+		Map<String, Object> reqMap = new HashMap<String, Object>();
+		reqMap.put("a_ID", a_ID);
+		System.out.println(announcementService.delete(reqMap));
+		return announcementService.delete(reqMap);
+	}
+	
+	@RequestMapping("/stick")
+	@ResponseBody
+	public String stickAnn(HttpSession session) {
+		String a_ID = (String) session.getAttribute("announcement_ID");
+		Map<String, Object> reqMap = new HashMap<String, Object>();
+		reqMap.put("a_ID", a_ID);
+		System.out.println(announcementService.stick(reqMap));
+		return announcementService.stick(reqMap);
+	}
+	
+	@RequestMapping("/unstick")
+	@ResponseBody
+	public String unstickAnn(HttpSession session) {
+		String a_ID = (String) session.getAttribute("announcement_ID");
+		Map<String, Object> reqMap = new HashMap<String, Object>();
+		reqMap.put("a_ID", a_ID);
+		System.out.println(announcementService.unstick(reqMap));
+		return announcementService.unstick(reqMap);
 	}
 	
 

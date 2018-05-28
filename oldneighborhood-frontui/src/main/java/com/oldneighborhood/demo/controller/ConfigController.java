@@ -2,19 +2,16 @@ package com.oldneighborhood.demo.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
 import com.oldneighborhood.demo.service.ConfigService;
 
-import net.sf.json.JSONObject;
+//import net.sf.json.JSONObject;
 
 @Controller
 public class ConfigController {
@@ -27,6 +24,15 @@ public class ConfigController {
 		// return "/login";
 		// }
 		return "/config/admin";
+	}
+	
+	@RequestMapping("/api")
+	public String api() {
+		// User user = (User) session.getAttribute("user");
+		// if (user == null) {
+		// return "/login";
+		// }
+		return "/config/api";
 	}
 
 	// admin管理员信息
@@ -47,7 +53,16 @@ public class ConfigController {
 	public String adminALl() {
 		return configService.alladmins();
 	}
-	
+	@RequestMapping("/api/all")
+	@ResponseBody
+	public String apiALl() {
+		return configService.allapis();
+	}
+	@RequestMapping("/api/modify")
+	@ResponseBody
+	public String modifyAPI(@RequestBody Map<String, Object> reqMap) {
+		return configService.modifyapi(reqMap);
+	}
 	@RequestMapping("/admin/new")
 	@ResponseBody
 	public String adminNew(@RequestBody Map<String, Object> reqMap) {

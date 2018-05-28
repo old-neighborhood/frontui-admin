@@ -39,7 +39,7 @@ $().ready(function() {
     		var data = $("#data-permission").val();
     		//形如"rrrrr"/"wwwww"/"rwrwr"
     		var ad_permission = config + site + announce + forum + data;
-    		console.log(ad_name + ad_password + ad_permission);
+//    		console.log(ad_name + ad_password + ad_permission);
     		
     		$.ajax({
         		//新建管理员的url，调整了ad_permission的内容，ad_image/ad_ID后台生成或默认
@@ -55,7 +55,7 @@ $().ready(function() {
                 dataType:"json",
     			timeout:5000,
                 success: function (data) {
-                	console.log(data);
+//                	console.log(data);
                 	var status = data.result;
                 	if (status == "error") {
                 		toastr.warning("新建失败！");

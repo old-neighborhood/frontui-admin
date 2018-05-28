@@ -17,9 +17,6 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
-  <!-- Date Picker -->
-  <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" rel="stylesheet" />
-  <!-- <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" /> -->
   <link href="css/toastr.css" rel="stylesheet"/>
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
@@ -63,16 +60,6 @@
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <!-- <div class="user-panel">
-        <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div> -->
       <!-- 搜索框 search form -->
       <form method="get" class="sidebar-form">
         <div class="input-group">
@@ -149,7 +136,7 @@
             
             <div class="box-body">
             <!-- 中央地图 -->
-            <div id="world-map" style="height: 500px; width: 100%;"></div>
+            <div id="world-map" style="height: 400px; width: 100%;"></div>
             </div>
             <!-- <div class="box-footer no-border">
               <div class="row">
@@ -203,18 +190,7 @@
                     <i class="fa fa-trash-o"></i>
                   </div>
                 </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <span class="text">公告 No.02</span>
-                  <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
+                
                 <li>
                       <span class="handle">
                         <i class="fa fa-ellipsis-v"></i>
@@ -227,57 +203,12 @@
                     <i class="fa fa-trash-o"></i>
                   </div>
                 </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <span class="text">公告 No.04</span>
-                  <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <span class="text">公告 No.05</span>
-                  <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <span class="text">公告 No.06</span>
-                  <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
+                
               </ul>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-left"><i class="fa fa-plus"></i> 新建公告</button>
-              <!-- 页码跳转 -->
-              <div id="annouce-page" class="box-tools pull-right">
-                <ul class="pagination pagination-sm inline">
-                  <li><a href="#">&laquo;</a></li>
-                  <li><a id="" href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">&raquo;</a></li>
-                </ul>
-              </div>
+              <a href="announce" type="button" class="btn btn-default pull-right"><i class="fa fa-chevron-right"></i> 查看更多</a>
             </div>
           </div>
           <!-- /.box -->
@@ -286,16 +217,7 @@
           <div class="box box-success">
             <div class="box-header">
               <i class="fa fa-comments-o"></i>
-
               <h3 class="box-title">论坛消息 </h3>
-
-              <div class="box-tools pull-right">
-                <div class="btn-group" data-toggle="btn-toggle">
-                  <button type="button" title="请求置顶" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i>
-                  </button>
-                  <button type="button" title="举报" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
-                </div>
-              </div>
             </div>
             <div class="box-body chat" id="chat-box">
               <!-- chat item -->
@@ -358,7 +280,7 @@
             </div>
             <!-- /.chat -->
             <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right"><i class="fa fa-chevron-right"></i> 查看更多</button>
+              <a href="forum" class="btn btn-default pull-right"><i class="fa fa-chevron-right"></i> 查看更多</a>
             </div>
           </div>
           <!-- /.box (chat box) -->

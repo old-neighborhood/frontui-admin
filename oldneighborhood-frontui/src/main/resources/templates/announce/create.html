@@ -19,16 +19,6 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" />
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css" />
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="bower_components/morris.js/morris.css" />
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css" />
-  <!-- Date Picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css" />
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
   <link href="css/toastr.css" rel="stylesheet"/>
   
   <!-- Google Font -->
@@ -56,7 +46,7 @@
         <ul class="nav navbar-nav">
           <!-- 用户名等 User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="info" title="个人信息" class="dropdown-toggle">
+            <a href="admin" title="个人信息" class="dropdown-toggle">
               <img src="http://111.231.107.63:8085/common/554c8d43389748f4a73bae0cad5cb4d7.png" class="user-image" alt="User Image" />
               <span class="hidden-xs">Bryan</span>
             </a>
@@ -166,23 +156,27 @@
 	          <form id="upload_image" enctype="multipart/form-data" method="post">
 	            <label for="announce_image">上传题图（可选）</label>
 	            <input id="file" type="file" name="file" />
-	            <label style="font-size:10px">支持.png|.jpg|.jpeg|.ico等格式图片，图片大小请小于5MB</label>
 	            <div id="uploadedimage"></div>
 	            <br/>
-	            <button id="upload" type="button" class="btn btn-primary"> 上传</button>
+	            <button id="upload" type="button" class="btn btn-sm btn-primary"> 上传</button>
+	            <label style="font-size:10px">支持.png|.jpg|.jpeg|.ico等格式图片，图片小于5MB</label>
 	          </form>
             </div>
             <div class="box-body pad">
               <form>
-              	<label for="announce_text">公告内容</label>
-                <textarea id="announce_text" class="textarea" placeholder="请输入内容......" required="required"
+              	<label for="editor">公告内容</label>
+              	<label style="font-size:10px">(插入图片小于5MB)</label>
+              	<div id="editor">
+              	</div>
+                <!-- <textarea id="editor" class="textarea" placeholder="请输入内容......" required="required"
                           style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                </textarea>
+                </textarea> -->
               </form>
             </div>
             <div class="box-footer">
               <div>
                 <button id="cancel" type="button" class="btn btn-default"><i class="fa fa-undo"></i> 取消</button>
+                <button id="preview" type="button" class="btn btn-default"><i class="fa fa-eye"></i> 预览</button>
                 <button id="create" type="button" class="btn btn-primary"><i class="fa fa-send"></i> 发布</button>
               </div>
             </div>
@@ -240,32 +234,14 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- Slimscroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
 <!-- DataTables -->
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<script src="js/toastr.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="dist/js/pages/dashboard.js"></script> -->
 <!-- AdminLTE for demo purposes -->

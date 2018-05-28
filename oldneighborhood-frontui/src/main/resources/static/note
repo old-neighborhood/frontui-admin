@@ -1,38 +1,18 @@
-1./bower_components/chart.js/samples/
-	各种图表
-2./bower_components/ckeditor/samples/index.html
-	编辑界面
-3./bower_components/ckeditor/samples/old/
-	关于文本编辑界面 过时的文件夹删除 - >坚果云adminALT-del
-4./bower_components/Flot/examples/annotating/index.html
-	图表
+关于文本编辑界面 过时的文件夹删除 - >坚果云adminALT-del
 5.0关于.gitignore的配置
 	https://www.jianshu.com/p/ea6341224e89
-5.File Hierarchy of the Source Code Package
-      AdminLTE/
-      ├── dist/
-      │   ├── CSS/
-      │   ├── JS
-      │   ├── img
-      ├── build/
-      │   ├── less/
-      │   │   ├── AdminLTE's Less files
-      │   └── Bootstrap-less/ (Only for reference. No modifications have been made)
-      │       ├── mixins/
-      │       ├── variables.less
-      │       ├── mixins.less
-      └── plugins/
-          ├── All the customized plugins CSS and JS files
-	dist/文件夹
-		全称是distribution。
-		在某些框架中，因为开发和发布是的内容或者代码形式是不一样的（比如利用Grunt压缩等等)，
-		这时候就需要一个存放最终发布版本的代码，这就是dist文件夹的用处。
-	build/文件夹
-	
 6.<!-- 显示代码高亮 -->
 https://github.com/google/code-prettify
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
-7.文件链接路径问题，放在文件夹里面的需要注意资源找不到
-	-- .html文件放在文件夹里面没问题
-	-- RequestMapping("")可能涉及上下文问题，会找不到资源
+
+{"ad_ID":"80d09f45cdd24b55926ba52b77204b05",
+"a_date":{"date":27,"hours":4,"seconds":13,"month":4,
+"nanos":0,"timezoneOffset":-480,"year":118,"minutes":37,"time":1527367033000,"day":0},
+"a_ID":27,
+"a_author":"ben",
+"a_title":"NO1",
+"a_view":2,
+"isSticky":false,
+"a_image":"http://111.231.107.63:8085/common/ddc266d5d2ad40aab10f137333670ef1.jpg",
+"a_content":"<p>Hello World!<\/p>"}

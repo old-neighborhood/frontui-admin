@@ -14,10 +14,10 @@ $().ready(function() {
 		timeout:5000,
         success: function (msg) {
         	data = msg;
-        	console.log(data);
+//        	console.log(data);
         	if (data!=null) {
         		var admins = $("#admintable");
-        		console.log(admins);
+//        		console.log(admins);
         		var admin = "";
         		
         		for (var i = 0; i < data.length; i++) {
@@ -41,7 +41,7 @@ $().ready(function() {
         		admins.html(admin);
         	}
         },error:function(e){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
-	    	console.log(e);
+//	    	console.log(e);
 	    	toastr.error("请求失败");
 	    }
 	});
@@ -114,13 +114,14 @@ $().ready(function() {
 			      "ad_permission":ad_permission,
 			      "ad_image":"http://111.231.107.63:8085/common/554c8d43389748f4a73bae0cad5cb4d7.png"
 	            }), 
-		      datatype:"json",
+		      dataType:"json",
 		      success:function (data) {
+//		    	  console.log(data.result);
 //		    	  var data = JSON.parse(msg);
-		    	  if (data.result == "success") {
+		    	  if (data.result=="success") {
 		    		  window.location="admin";
 		    	  }else {
-		    		  toastr.error("修改失败");
+		    		  toastr.error("失败请重试");
 		    	  }
 		      },error:function (){
 		    	  toastr.error("调用失败");

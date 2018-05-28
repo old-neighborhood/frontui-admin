@@ -50,6 +50,11 @@ public class UserController {
 	public String agree(ModelMap map) {
 		return "/agree";
 	}
+	
+	@RequestMapping("/about")
+	public String intro(ModelMap map) {
+		return "/info";
+	}
 
 	// login out
 	@RequestMapping("/loginout")

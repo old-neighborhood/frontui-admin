@@ -15,12 +15,14 @@ public interface ConfigService {
 	public String newAdmin(@RequestBody Map<String, Object> reqMap);
 	@RequestMapping("/config/admin/delete")
 	public String delAdmin(@RequestBody Map<String, Object> reqMap);
-	@RequestMapping("/config/admin/mofify")
+	@RequestMapping("/config/admin/modify")
 	public String modifyAdmin(@RequestBody Map<String, Object> reqMap);
 	
 	//api
 	@RequestMapping(value="/config/api/all")
-	public String allapis(Map<String, Object> reqMap);
+	public String allapis();
+	@RequestMapping(value="/config/api/modify")
+	public String modifyapi(Map<String, Object> reqMap);
 	//Statistic
 	@RequestMapping("/config/statistics/crowd")
 	public String getCrowd(Map<String, Object> reqMap);

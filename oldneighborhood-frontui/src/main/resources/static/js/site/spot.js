@@ -2,7 +2,7 @@ $().ready(function() {
 	
 	$.ajax({
 		//
-        url: "http://localhost:8087/oldneighborhood/site/list",
+        url: "admin/site/list",
         type: 'post',
         contentType:'application/json',
         dataType:"json",
@@ -30,13 +30,6 @@ $().ready(function() {
 	    	toastr.error("请求失败");
 	    }
 	});
-	
-	
-	
-	
-	
-	
-	
 	
 	
 })

@@ -12,9 +12,9 @@ public class ErrorController {
 		return "/error/404";
 	}
 	
-	@RequestMapping(value= {"/500"})
-	public String error500(ModelMap map) {
-		return "/error/500";
-	}
+//	@RequestMapping(value= {"/500"})
+//	public String error500(ModelMap map) {
+//		return "/error/500";
+//	}
 
 }

@@ -1,30 +1,52 @@
+Date.prototype.Format = function (fmt) { //author: meizz 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+
 $().ready(function() {
-	
+//	$('#annoucetable').DataTable();
 	$.ajax({
 		//
-        url: "http://localhost:808X/oldneighborhood/announcement/list",
+        url: "/admin/getAnnouncementList",
         type: 'post',
         contentType:'application/json',
         dataType:"json",
 		timeout:5000,
         success: function (data) {
-        	console.log(data);
+//        	console.log(data);
         	var announceHTML = $("#annoucetable")
         	var announce = '<thead><tr>'+
         		'<th hidden="hidden" id="annoucement_id"></th>'+
-        		'<th style="width:30%">标题</th>'+
-        		'<th style="width:50%">内容</th>'+
-                '<th style="width:10%">作者</th>'+
-                '<th style="width:10%">日期</th></tr></thead>';
+        		'<th style="width:35%">标题</th>'+
+        		'<th style="width:35%">内容</th>'+
+                '<th style="width:15%">作者</th>'+
+                '<th style="width:15%">日期</th></tr></thead>';
         	if (data!=null) {
         		announce += '<tbody>'
         		for (var i = 0; i < data.length; i++) {
-        			var one = '<tr><td name="id" hidden="hidden">'+ data[i].a_ID +'</td>' +
-//        				'<td><a href="/announcedetail?announce_id="'+ data[i].a_ID +' name="title">'+ data[i].a_title + '</a></td>' +
-        				'<td><a href="#" name="title">'+ data[i].a_title + '</a></td>' +
-        				'<td>' + data[i].a_content.sbustr(0,30) + '......</td>' + 
-        				'<td>' + data[i].a_author + '</td>'+
-        				'<td>' + data[i].a_date + '</td></tr>';
+//        			console.log(data[i]);
+        			console.log(data[i].a_date.time);
+        			var date = (new Date(data[i].a_date.time)).Format("yyyy-MM-dd hh:mm:ss");
+        			var one = '<tr><td name="id" hidden="hidden">' + data[i].a_ID +'</td>';
+        			if (data[i].isSticky==true){
+        				one += '<td><a href="#" name="title">[置顶]'+ data[i].a_title + '</a></td>';
+        			}else{
+        				one += '<td><a href="#" name="title">'+ data[i].a_title + '</a></td>';
+        			}
+    				one += '<td>' + data[i].a_content.substring(0,30) + '</td>' + 
+    				'<td>' + data[i].a_author + '</td>'+
+    				'<td>' + date + '</td></tr>';
         			announce += one;
         		}
         		announce += '</tbody>';
@@ -32,6 +54,55 @@ $().ready(function() {
         		announce += '<tfoot><tr><td colspan="5" style="font-size:10px"> 暂无公告信息 </td></tr></thead><tfoot>';
         	}
         	announceHTML.html(announce);
+        	$('#annoucetable').DataTable({
+        		"order": [[ 4, "desc" ]]
+        	});
+        },error:function(e){ 
+	    	toastr.error("请求失败");
+	    }
+	});
+	
+	$.ajax({
+		//
+        url: "/admin/getStickyList",
+        type: 'post',
+        contentType:'application/json',
+        dataType:"json",
+		timeout:5000,
+        success: function (data) {
+//        	console.log(data);
+        	var announceHTML = $("#annoucetable_mark")
+        	var announce = '<thead><tr>'+
+        		'<th hidden="hidden" id="annoucement_id"></th>'+
+        		'<th style="width:35%">标题</th>'+
+        		'<th style="width:35%">内容</th>'+
+                '<th style="width:15%">作者</th>'+
+                '<th style="width:15%">日期</th></tr></thead>';
+        	if (data!=null) {
+        		announce += '<tbody>'
+        		for (var i = 0; i < data.length; i++) {
+//        			console.log(data[i]);
+        			console.log(data[i].a_date.time);
+        			var date = (new Date(data[i].a_date.time)).Format("yyyy-MM-dd hh:mm:ss");
+        			var one = '<tr><td name="id" hidden="hidden">' + data[i].a_ID +'</td>';
+        			if (data[i].isSticky==true){
+        				one += '<td><a href="#" name="title">[置顶]'+ data[i].a_title + '</a></td>';
+        			}else{
+        				one += '<td><a href="#" name="title">'+ data[i].a_title + '</a></td>';
+        			}
+    				one += '<td>' + data[i].a_content.substring(0,30) + '</td>' + 
+    				'<td>' + data[i].a_author + '</td>'+
+    				'<td>' + date + '</td></tr>';
+        			announce += one;
+        		}
+        		announce += '</tbody>';
+        	}else {
+        		announce += '<tfoot><tr><td colspan="5" style="font-size:10px"> 暂无公告信息 </td></tr></thead><tfoot>';
+        	}
+        	announceHTML.html(announce);
+        	$('#annoucetable_mark').DataTable({
+        		"order": [[ 4, "desc" ]]
+        	});
         },error:function(e){ 
 	    	toastr.error("请求失败");
 	    }
@@ -59,17 +130,17 @@ $().ready(function() {
 		    contentType:'application/json',
 		    dataType: 'json',
 		    //获取单个公告
-		    url: "setAnnouncementID",
-		    data:{
-	        	"a_ID":id,
-//	        	"prev_ID":prev_ID,
-//	        	"next_ID":next_ID
-	        }, 
+		    url: "/admin/setAnnouncementID",
+		    data:JSON.stringify({
+		    	"a_ID":id,
+		    	"prev_ID":prev_id,
+	        	"next_ID":next_id
+	            }), 
 		    timeout: 5000,
 		    success:function(data){
 		    	console.log(data);
 //		    	var result = data.result;
-		    	window.location="announce/detail";
+		    	window.location="announcedetail";
 		    },error:function(e){
 		    	toastr.error("请求失败！");
 		    }

@@ -1,5 +1,30 @@
 $().ready(function() {
-	$('.textarea').wysihtml5();
+//	$('.textarea').wysihtml5();
+	var E = window.wangEditor
+    var editor = new E('#editor')
+    editor.customConfig.menus = [
+    	'head',  // 标题
+        'bold',  // 粗体
+        'fontSize',  // 字号
+        'fontName',  // 字体
+        'italic',  // 斜体
+        'underline',  // 下划线
+        'strikeThrough',  // 删除线
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'link',  // 插入链接
+        'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'image',  // 插入图片
+        'video',  // 插入视频
+        'undo',  // 撤销
+        'redo'  // 重复
+    ]
+    editor.customConfig.uploadImgShowBase64 = true
+    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024
+//    editor.customConfig.uploadImgServer = 'http://111.231.107.63:8085/common/file/fileupload'
+    editor.create()
 	
 	
 	var imageurl = null;
@@ -9,7 +34,7 @@ $().ready(function() {
 		var formdata = new FormData(form[0]);
 		var btn = $("#upload");
 		$.ajax({
-            url: 'http://192.168.48.136:8085/common/file/fileupload',
+            url: 'http://111.231.107.63:8085/common/file/fileupload',
 //            url: 'http://111.231.107.63:8085/common/fileupload',
             type: 'POST',
             data: formdata,                    // 上传formdata封装的数据
@@ -24,7 +49,7 @@ $().ready(function() {
 //            		btn.attr("disabled","disabled");
             		btn.html("重新上传");
             		imageurl = msg.filename;
-            		var imgHTML = '<img alt="题图" src="' + imageurl + '" width="400px">';
+            		var imgHTML = '<br><img alt="题图" src="' + imageurl + '" width="500px">';
             		console.log("上传成功！");
             		$("#uploadedimage").html(imgHTML);
             	}else if(flag=="error"){
@@ -38,28 +63,31 @@ $().ready(function() {
         });
 	})
 	
-	$("#modify").click(function(){
+	$("#create").click(function(){
 		var a_name = $("#announce_name").val();
 		var a_author = $("#announce_author").val();
-		var a_content = $("#announce_text").val();
+		var a_content = editor.txt.html();
+		console.log(a_content);
+		console.log(a_name);
 		var a_image = "";
 		if (imageurl!=null){
 			a_image = imageurl;
 		}
 		
 		$.ajax({
-			//在controller中拼贴上其他数据后传输
-            url: "newAnnouncement",
+			//一直走error
+            url: "/admin/release",
             type: 'post',
             contentType:'application/json',
-            data:{
-            	"a_name":a_name,
+            data:JSON.stringify({
+            	"a_title":a_name,
     			"a_author":a_author,
     			"a_content":a_content,
-    			"a_image":a_image
-            }, 
+    			"a_image":a_image,
+    			"ad_ID":"80d09f45cdd24b55926ba52b77204b05"
+            }), 
             dataType:"json",
-			timeout:5000,
+			timeout:20000,
             success: function (data) {
             	console.log(data);
             	var status = data.result;
@@ -68,10 +96,11 @@ $().ready(function() {
 				}else if(status == "success") {
 					toastr.success("发布成功！");
 					setTimeout(function(){
-						window.location = "/oldneighborhood/announce";
+						window.location = "/admin/announce";
 					},1000);
 				}
-            },error:function() {
+            },error:function(msg) {
+            	toastr.info(msg);
             	toastr.warning("调用失败");
             }
 		});
@@ -79,7 +108,7 @@ $().ready(function() {
 	
 	
 	$("#cancel").click(function(){
-		window.location = "/oldneighborhood/announce";
+		window.location = "/admin/announce";
 	})
 		
 	

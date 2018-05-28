@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8" /> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Admin-OldNeighborhood | admin</title>
+  <title>Admin-OldNeighborhood | config</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
   <!-- Bootstrap 3.3.7 -->
@@ -112,13 +112,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>系统配置
-        <small>管理员信息</small>
+      <h1>API配置
+        <small>API信息</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">configure</a></li>
-        <li class="active">administrator</li>
+        <li class="active">api</li>
       </ol>
     </section>
     
@@ -132,27 +132,43 @@
               <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th hidden="hidden">管理员ID</th>
-                  <th>管理员名称</th>
-                  <th>管理员密码</th>
-                  <th>系统配置权限</th>
-                  <th>景区管理权限</th>
-                  <th>公告管理权限</th>
-                  <th>论坛管理权限</th>
-                  <th>数据统计权限</th>
-                  <th>修改 | 删除</th>
+                  <th hidden="hidden">api_ID</th>
+                  <th>api-名称</th>
+                  <th>api-key</th>
+                  <th>api-URL</th>
+                  <th>修改</th>
                 </tr>
                 </thead>
-                <tbody id="admintable">
+                <tbody id="apitable">
+                  <!-- <tr>
+                    <td hidden="hidden">flowflowflowflowflowflowflowflow</td>
+                    <td>flow</td>
+                    <td></td>
+                    <td></td>
+                    <td><a name="edit" href="#">修改</a><span></td>
+                  </tr>
+                  <tr>
+                    <td hidden="hidden">ticketticketticketticketticketti</td>
+                    <td>ticket</td>
+                    <td></td>
+                    <td></td>
+                    <td><a name="edit" href="#">修改</a><span></td>
+                  </tr>
+                  <tr>
+                    <td hidden="hidden">parkinglotparkinglotparkinglotpa</td>
+                    <td>parkinglot</td>
+                    <td></td>
+                    <td></td>
+                    <td><a name="edit" href="#">修改</a><span></td>
+                  </tr> -->
                 </tbody>
                 <tfoot>
                 <tr>
-                <td colspan="8" style="font-size:10px"><span style="color:brown">注意：管理员账号不得超过10个</span><br/>
-                	<span>读权限表示能够查看信息，写权限表示能够修改信息</span></td>
+                <td colspan="8" style="font-size:10px">当前支持flow人流量、ticket票务量、parkinglot停车场停车位接口<br/>
+                </td>
                 </tr>
                 </tfoot>
               </table>
-              <a href="newadmin" class="btn btn-primary">新建账号</a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -205,7 +221,92 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="js/config/admintable.js"></script>
 <!-- page script --> 
+<script>
+$(function () {
+	var data = null;
+	$.ajax({
+		//
+        url: "/admin/api/all",
+        type: 'post',
+        contentType:'application/json',
+        dataType:"json",
+		timeout:5000,
+        success: function (msg) {
+        	data = msg;
+        	console.log(data);
+        	if (data.length!=0) {
+        		var admins = $("#apitable");
+//        		console.log(admins);
+        		var admin = "";
+        		
+        		for (var i = 0; i < 3; i++) {
+        			var one = '<tr><td hidden="hidden">' + data[i].api_ID + '</td>' +
+        			'<td>' + data[i].api_name + '</td>' +
+        			'<td>' + data[i].api_url + '</td>' +
+        			'<td>' + data[i].api_key + '</td>';
+        			one += '<td><a name="edit" href="#">修改</a><span></td></tr>';
+        			admin += one;
+        		}
+        		admins.html(admin);
+        	}
+        },error:function(e){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象
+//	    	console.log(e);
+	    	toastr.error("请求失败");
+	    }
+	});
+	
+	
+	$(document).on('click','[name="edit"]',function(e){
+//		var id = $(this).parent().parent().find('td:first').text();
+		var thisHTML = $(this).parent().parent().children();//td
+		console.log(thisHTML);
+		var id = thisHTML[0].innerText;
+//		thisHTML[1].innerHTML="<input type='text' class='form-control' value='" + thisHTML[1].innerText + "'/>";
+		thisHTML[2].innerHTML="<input type='text' class='form-control' value='" + thisHTML[2].innerText + "'/>";
+		thisHTML[3].innerHTML="<input type='text' class='form-control' value='" + thisHTML[3].innerText + "'/>";
+		thisHTML[4].innerHTML='<a name="confirm" href="#">确认</a><span> | </span><a name="cancel" href="#">取消</a>';
+	})
+	//确认修改
+	$(document).on('click','[name="confirm"]',function(e){
+		var thisvalue = $(this).parent().siblings();
+		var ad_ID = thisvalue[0].innerText;
+		var ad_name = thisvalue[1].innerText;
+		var ad_key = thisvalue[2].children[0].value;
+		var ad_url = thisvalue[3].children[0].value;
+//		console.log(ad_ID+ad_name+ad_key+ad_url);
+		
+		$.ajax({
+		      url:"/admin/api/modify",
+		      type:"POST",
+		      contentType:'application/json',
+		      data:JSON.stringify({
+		    	  "api_ID":ad_ID,
+			      "api_name":ad_name,
+			      "api_url":ad_key,
+			      "api_key":ad_url
+	            }), 
+		      dataType:"json",
+		      success:function (data) {
+//		    	  console.log(data.result);
+//		    	  var data = JSON.parse(msg);
+		    	  if (data.result=="success") {
+		    		  window.location="api";
+		    	  }else {
+		    		  toastr.error("失败请重试");
+		    	  }
+		      },error:function (){
+		    	  toastr.error("调用失败");
+		      }
+		 });
+		
+	})
+	//取消修改
+	$(document).on('click','[name="cancel"]',function(e){
+		window.location="api";
+	});
+    
+})
+</script>
 </body>
 </html>

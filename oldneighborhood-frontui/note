@@ -1,3 +1,81 @@
+7.文件链接路径问题，放在文件夹里面的需要注意资源找不到
+	-- .html文件放在文件夹里面没问题
+	-- RequestMapping("")可能涉及上下文问题，会找不到资源
+	-- XXXService - 到Eureka一定主义路径问题 /context/XX/XX
+8.HTML Thymeleaf严格问题
+	-- spring.thymeleaf.mode=LEGACYHTML5
+	-- <dependency>
+   			<groupId>nekohtml</groupId>
+   			<artifactId>nekohtml</artifactId>
+   			<version>1.9.6.2</version>
+		</dependency>
+		
+9.windows系统更新通知 8090端口，如果占用
+	-- Error creating bean with name 'eurekaAutoServiceRegistration': 
+	Singleton bean creation not allowed while singletons of this factory 
+	are in destruction (Do not request a bean from a BeanFactory in a 
+	destroy method implementation!)
+	
+10.
+	-- Forwarding to error page from request [/sendMsg] due to exception 
+	[Mail server connection failed; nested exception is com.sun.mail.util.
+	MailConnectException: Couldn't connect to host, port: smtp.yeah.net, 25; timeout -1;
+	-- timeout
+	-- 554 com.sun.mail.smtp.SMTPSendFailedException: 554 DT:SPM yeah smtp1,
+	ClUQrACXnkpLQu9awJWYAQ--.2447S3 1525629515,please see 
+	http://mail.163.com/help/help_spam_16.htm?ip=111.231.107.63&hostid=smtp1&time=1525629515
+
+4.数据库编码问题--尚未解决
+	https://cloud.tencent.com/document/product/236/7259
+	https://blog.csdn.net/yzwlord/article/details/7312781
+	https://blog.csdn.net/ACMAIN_CHM/article/details/4174186
+
+Server characterset:    latin1
+Db     characterset:    utf8
+Client characterset:    utf8
+Conn.  characterset:    utf8
+character_set_client为客户端编码方式；
+character_set_connection为建立连接使用的编码；
+character_set_database数据库的编码； 
+character_set_results结果集的编码； 
+character_set_server数据库服务器的编码； 
+
++--------------------------+----------------------------+
+| Variable_name            | Value                      |
++--------------------------+----------------------------+
+| character_set_client     | utf8                       |
+| character_set_connection | utf8                       |
+| character_set_database   | latin1                     |
+| character_set_filesystem | binary                     |
+| character_set_results    | utf8                       |
+| character_set_server     | latin1                     |
+| character_set_system     | utf8                       |
+| character_sets_dir       | /usr/share/mysql/charsets/ |
++--------------------------+----------------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 http://www.infoq.com/cn/articles/Next-Generation-Session-Management-with-Spring-Session/
 1.配置Spring Session
 	搭建用于Spring Session的数据存储
