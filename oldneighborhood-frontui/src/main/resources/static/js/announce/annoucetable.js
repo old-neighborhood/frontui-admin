@@ -25,11 +25,11 @@ $().ready(function() {
 		timeout:5000,
         success: function (data) {
 //        	console.log(data);
-        	var announceHTML = $("#annoucetable")
+        	var announceHTML = $("#annoucetable");
         	var announce = '<thead><tr>'+
         		'<th hidden="hidden" id="annoucement_id"></th>'+
         		'<th style="width:35%">标题</th>'+
-        		'<th style="width:35%">内容</th>'+
+        		//'<th style="width:35%">内容</th>'+
                 '<th style="width:15%">作者</th>'+
                 '<th style="width:15%">日期</th></tr></thead>';
         	if (data!=null) {
@@ -44,7 +44,8 @@ $().ready(function() {
         			}else{
         				one += '<td><a href="#" name="title">'+ data[i].a_title + '</a></td>';
         			}
-    				one += '<td>' + data[i].a_content.substring(0,30) + '</td>' + 
+    				one += 
+    				//'<td>' + data[i].a_content.substring(0,30) + '</td>' + 
     				'<td>' + data[i].a_author + '</td>'+
     				'<td>' + date + '</td></tr>';
         			announce += one;
@@ -55,7 +56,7 @@ $().ready(function() {
         	}
         	announceHTML.html(announce);
         	$('#annoucetable').DataTable({
-        		"order": [[ 4, "desc" ]]
+        		"order": [[ 3, "desc" ]]
         	});
         },error:function(e){ 
 	    	toastr.error("请求失败");
@@ -75,7 +76,7 @@ $().ready(function() {
         	var announce = '<thead><tr>'+
         		'<th hidden="hidden" id="annoucement_id"></th>'+
         		'<th style="width:35%">标题</th>'+
-        		'<th style="width:35%">内容</th>'+
+        		//'<th style="width:35%">内容</th>'+
                 '<th style="width:15%">作者</th>'+
                 '<th style="width:15%">日期</th></tr></thead>';
         	if (data!=null) {
@@ -90,7 +91,8 @@ $().ready(function() {
         			}else{
         				one += '<td><a href="#" name="title">'+ data[i].a_title + '</a></td>';
         			}
-    				one += '<td>' + data[i].a_content.substring(0,30) + '</td>' + 
+    				one += 
+    				//'<td>' + data[i].a_content.substring(0,30) + '</td>' + 
     				'<td>' + data[i].a_author + '</td>'+
     				'<td>' + date + '</td></tr>';
         			announce += one;
@@ -100,9 +102,9 @@ $().ready(function() {
         		announce += '<tfoot><tr><td colspan="5" style="font-size:10px"> 暂无公告信息 </td></tr></thead><tfoot>';
         	}
         	announceHTML.html(announce);
-        	$('#annoucetable_mark').DataTable({
-        		"order": [[ 4, "desc" ]]
-        	});
+//        	$('#annoucetable_mark').DataTable({
+//        		"order": [[ 3, "desc" ]]
+//        	});
         },error:function(e){ 
 	    	toastr.error("请求失败");
 	    }

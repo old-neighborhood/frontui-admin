@@ -87,19 +87,8 @@
             <li><a href="api"><i class="fa fa-link"></i> API配置</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-bank"></i>
-            <span>景区管理</span>
-            <span class="pull-right-container">
-              <span class="fa fa-angle-left pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="spot"><i class="fa fa-camera"></i> 景点</a></li>
-            <li><a href="market"><i class="fa fa-shopping-cart"></i> 店铺</a></li>
-          </ul>
-        </li>
+        <li><a href="spot"><i class="fa fa-bank"></i> <span> 景区管理</span></a></li>
+        <li><a href="market"><i class="fa fa-shopping-cart"></i> <span> 店铺管理</span></a></li>
         <li><a href="announce"><i class="fa fa-file-text-o"></i> <span> 公告管理</span></a></li>
         <li><a href="forum"><i class="fa fa-quote-left"></i> <span> 论坛管理</span></a></li>
         <li><a href="flow"><i class="fa fa-bar-chart"></i> <span> 信息统计</span></a></li>
@@ -127,11 +116,11 @@
       <!-- Small boxes (Stat box) -->
       <div class="box box-primary">
       <div class="box-header">
-              <i class="fa fa-camera"></i>
+              <i class="fa fa-shopping-cart"></i>
               <h3 class="box-title">店铺列表</h3>
             </div>
-      <div class="box-body">
-      <div class="col-md-12" style="margin-left:20px;">
+      <div id="marketdetail" class="box-body">
+      <div class="col-md-12">
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -139,7 +128,7 @@
               <li><a href="#tab_2" data-toggle="tab">正常</a></li>
               <li><a href="#tab_3" data-toggle="tab">申请</a></li>
               <li><a href="#tab_4" data-toggle="tab">注销</a></li>
-              <li class="dropdown">
+              <!-- <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">申请时间正序
                  <span class="caret"></span>
                 </a>
@@ -147,7 +136,7 @@
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="#">正序</a></li>
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="#">倒序</a></li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1"></div>

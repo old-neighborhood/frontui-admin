@@ -1,5 +1,26 @@
 $().ready(function() {
-	var E = window.wangEditor
+	
+    var a_ID = null;
+    $.ajax({
+		async: false,
+	    type: "POST",
+	    contentType:'application/json',
+	    dataType: 'json',
+	    //获取单个公告
+	    url: "/admin/announceDetail",
+	    timeout: 5000,
+	    success:function(data){
+	    	console.log(data);
+	    	a_ID = data.a_ID;
+	    	$('#announce_name').val(data.a_title);
+	    	$('#announce_author').val(data.a_author);
+	    	$('#editor').html(data.a_content);
+	    },error:function(e){
+	    	toastr.error("请求失败！");
+	    }
+	});
+    
+    var E = window.wangEditor
     var editor = new E('#editor')
     editor.customConfig.menus = [
     	'head',  // 标题
@@ -23,23 +44,25 @@ $().ready(function() {
     editor.customConfig.uploadImgShowBase64 = true
     editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024
 //    editor.customConfig.uploadImgServer = 'http://111.231.107.63:8085/common/file/fileupload'
-    editor.create()
+    editor.create();
 	
-	$("#create").click(function(){
+	$("#modify").click(function(){
 		var a_name = $("#announce_name").val();
 		var a_author = $("#announce_author").val();
-		var a_content = $("#announce_text").val();
+		var a_content = editor.txt.html();
 		
 		$.ajax({
 			//在controller中拼贴上其他数据后传输
-            url: "newAnnouncement",
+            url: "/admin/update",
             type: 'post',
             contentType:'application/json',
-            data:{
-            	"a_name":a_name,
-    			"a_author":a_author,
-    			"a_content":a_content
-            }, 
+            data:JSON.stringify({
+            	"a_title": a_name,
+    			"a_author": a_author,
+    			"a_content": a_content,
+    			"a_ID": a_ID,
+    			"a_image":""
+            }), 
             dataType:"json",
 			timeout:5000,
             success: function (data) {
@@ -54,13 +77,17 @@ $().ready(function() {
 					},1000);
 				}
             },error:function() {
-            	toastr.warning("调用失败");
+            	toastr.warning("更新失败");
             }
 		});
 	});
 	
 	$("#cancel").click(function(){
 		window.location = "/admin/announce";
-	})
+	});
+	
+	$("#reset").click(function(){
+		window.location = "/admin/announce";
+	});
 	
 })

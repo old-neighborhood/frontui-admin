@@ -1,8 +1,9 @@
 $().ready(function() {
 	
+	var spotsHTML = $("#spots");
 	$.ajax({
 		//
-        url: "admin/site/list",
+        url: "/admin/getSiteList",
         type: 'post',
         contentType:'application/json',
         dataType:"json",
@@ -10,19 +11,18 @@ $().ready(function() {
         success: function (data) {
         	console.log(data);
         	if (data!=null) {
-        		var spotsHTML = $("#spots");
-        		console.log(spotsHTML);
         		var spots = "";
-        		
         		for (var i = 0; i < data.length; i++) {
-        			var one = '<div class="col-lg-2 col-xs-6"><div class="small-box bg-green">' +
+        			var one = '<div class="col-lg-3 col-xs-6"><div class="small-box bg-green">' +
         				'<div class="inner"><h3>' + data[i].site_name + 
         				'</h3><p>' + data[i].site_address +
-        				'</p></div><div class="icon"><i class="fa fa-camera-retro"></i></div>' +
+        				'</p></div><div class="icon"><i class="fa fa-camera-retro"></i>' + 
+//        				<i class="fa fa-camera-retro"></i>
+        				'</div><button hidden="hidden" name="siteID">' + data[i].site_ID + '</button>' +
         				'<a name="detail" href="#" class="small-box-footer">查看详细信息 <i class="fa fa-arrow-right"></i></a></div></div>';
         			spots += one;
         		}
-        		
+        		console.log(spots);
         		spotsHTML.html(spots);
         	}
         },error:function(e){ //请求失败时被调用的函数。3个参数：XMLHttpRequest对象、错误信息、捕获的错误对象

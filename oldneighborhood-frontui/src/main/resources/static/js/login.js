@@ -6,7 +6,7 @@ $().ready(function() {
         rules: {
         	username:{
         		required: true,
-        		minlength: 5
+        		minlength: 2
         	},
         	userpassword: {
                 required: true,
@@ -58,7 +58,7 @@ $().ready(function() {
     					if (usertype=="user") {
     						window.location = "http://111.231.107.63:8080/";
     					} else if (usertype == "saler") {
-    						window.location = "http://192.168.48.134:8080/SalerIndex";
+    						window.location = "http://118.126.64.169:8080/SalerIndex";
 //    						window.location = "/oldneighborhood/saler";
     					}else if (usertype=="admin"){
     						window.location="/admin/index";

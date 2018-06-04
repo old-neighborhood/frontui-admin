@@ -37,9 +37,9 @@ $().ready(function() {
 	    	if (data!=null){
 	    		announcement_ID.html(data.a_ID);
 	    		if (data.isSticky==false){
-	    			stickHTML.html('<i class="fa fa-print"></i> 置顶');
+	    			stickHTML.html(' 置顶');
 	    		}else{
-	    			stickHTML.html('<i class="fa fa-print"></i> 取消置顶');
+	    			stickHTML.html(' 取消置顶');
 	    		}
 	    		var title = '<h3>'+ data.a_title +'</h3><br /><div class="mailbox-read-time"><h5><span class="fa fa-user">&nbsp;作者 '+ data.a_author +' &nbsp;&nbsp;</span> '+  
                   	'<span class="fa fa-calendar-o">&nbsp;日期 '+ (new Date(data.a_date.time)).Format("yyyy-MM-dd hh:mm:ss") +' &nbsp;&nbsp;</span> '+
@@ -72,7 +72,7 @@ $().ready(function() {
 			    success:function(msg){
 			    	var result = msg.result;
 			    	if (result=="success"){
-			    		stickHTML.html('<i class="fa fa-print"></i> 置顶');
+			    		$("[name='stick']").html(' 置顶');
 			    	}else {
 			    		toastr.error("取消置顶失败！")
 			    	}
@@ -93,7 +93,7 @@ $().ready(function() {
 			    	console.log(msg);
 			    	var result = msg.result;
 			    	if (result=="success"){
-			    		stickHTML.html('<i class="fa fa-print"></i> 取消置顶');
+			    		$("[name='stick']").html(' 取消置顶');
 			    	}else {
 			    		toastr.error("取消置顶失败！")
 			    	}

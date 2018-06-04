@@ -22,74 +22,74 @@ public class ManagementController {
 	
 	@RequestMapping("/market")
 	public String market(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/site/market";
 	}
 	
 	//页面跳转部分
 	@RequestMapping("/announce")
 	public String list(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/announce/announcement";
 	}
 	
 	@RequestMapping("/createannouncement")
 	public String create(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/announce/create";
 	}
 	
 	@RequestMapping("/modifyannoucement")
 	public String modify(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/announce/modify";
 	}
 	
 	@RequestMapping("/announcedetail")
 	public String detail0(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/announce/detail";
 	}
 	
 	@RequestMapping("/spot")
 	public String spotlist(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/site/spot";
 	}
 	
 	@RequestMapping("/addspot")
 	public String addspot(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/site/addspot";
 	}
 
 	@RequestMapping("/spotdetail")
 	public String spotde(ModelMap map, HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
 		return "/site/spotdetail";
 	}
 	
@@ -100,10 +100,19 @@ public class ManagementController {
 	@RequestMapping("/setAnnouncementID")
 	public @ResponseBody String setannoucement_ID(@RequestBody Map<String,Object> map, HttpSession session) {
 		String a_ID = map.get("a_ID").toString();
-		String prev_ID = map.get("prev_ID").toString();
-		String next_ID = map.get("next_ID").toString();
-		System.out.println("Announcement_ID - > " + a_ID + "<" + prev_ID + ">" + next_ID);
+//		String prev_ID = map.get("prev_ID").toString();
+//		String next_ID = map.get("next_ID").toString();
+//		System.out.println("Announcement_ID - > " + a_ID + "<" + prev_ID + ">" + next_ID);
+		System.out.println("Announcement_ID - > " + a_ID);
 		session.setAttribute("announcement_ID", a_ID);
+		return "{\"result\":\"success\"}";
+	}
+	//session存储当前site_ID
+	@RequestMapping("/setSiteID")
+	public @ResponseBody String setSiteID(@RequestBody Map<String,Object> map, HttpSession session) {
+		String site_ID = map.get("site_ID").toString();
+		System.out.println("site_ID - > " + site_ID);
+		session.setAttribute("site_ID", site_ID);
 		return "{\"result\":\"success\"}";
 	}
 	
@@ -118,6 +127,11 @@ public class ManagementController {
 	public String getlist() {
 		return announcementService.list();
 	}
+	@RequestMapping("/getAnnouncementPage")
+	@ResponseBody
+	public String getlistPage(@RequestBody Map<String, Object> reqMap) {
+		return announcementService.listbypage(reqMap);
+	}
 	@RequestMapping("/getStickyList")
 	@ResponseBody
 	public String getStickylist() {
@@ -129,6 +143,13 @@ public class ManagementController {
 	public String release(@RequestBody Map<String, Object> reqMap, HttpSession session) {
 		System.out.println(reqMap);
 		return announcementService.release(reqMap);
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public String update(@RequestBody Map<String, Object> reqMap) {
+//		reqMap.put("ad_ID", "80d09f45cdd24b55926ba52b77204b05");
+		return announcementService.modify(reqMap);
 	}
 	
 	@RequestMapping("/announceDetail")
@@ -169,6 +190,18 @@ public class ManagementController {
 		reqMap.put("a_ID", a_ID);
 		System.out.println(announcementService.unstick(reqMap));
 		return announcementService.unstick(reqMap);
+	}
+	
+	@RequestMapping("/getSiteList")
+	@ResponseBody
+	public String getSitelist() {
+		return announcementService.listAllSite();
+	}
+	
+	@RequestMapping("/addSimpleSite")
+	@ResponseBody
+	public String simpleAddSite(@RequestBody Map<String, Object> reqMap) {
+		return announcementService.addSimple(reqMap);
 	}
 	
 

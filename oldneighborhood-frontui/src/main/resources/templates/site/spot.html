@@ -87,19 +87,8 @@
             <li><a href="api"><i class="fa fa-link"></i> API配置</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-bank"></i>
-            <span>景区管理</span>
-            <span class="pull-right-container">
-              <span class="fa fa-angle-left pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="spot"><i class="fa fa-camera"></i> 景点</a></li>
-            <li><a href="market"><i class="fa fa-shopping-cart"></i> 店铺</a></li>
-          </ul>
-        </li>
+        <li><a href="spot"><i class="fa fa-bank"></i> <span> 景区管理</span></a></li>
+        <li><a href="market"><i class="fa fa-shopping-cart"></i> <span> 店铺管理</span></a></li>
         <li><a href="announce"><i class="fa fa-file-text-o"></i> <span> 公告管理</span></a></li>
         <li><a href="forum"><i class="fa fa-quote-left"></i> <span> 论坛管理</span></a></li>
         <li><a href="flow"><i class="fa fa-bar-chart"></i> <span> 信息统计</span></a></li>
@@ -132,7 +121,6 @@
             </div>
       <div class="box-body">
       <div id="spots" class="row">
-      
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
@@ -144,7 +132,8 @@
             <div class="icon">
               <i class="fa fa-camera-retro"></i>
             </div>
-            <a href="#" class="small-box-footer">查看详细信息 <i class="fa fa-arrow-right"></i></a>
+            <button hidden="hidden" name="site_ID"></button>
+            <a name="detail" class="small-box-footer">查看详细信息 <i class="fa fa-arrow-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -172,7 +161,7 @@
               <p>开放时间：周一-周五 10:00~17:00</p>
             </div>
             <div class="icon">
-              <i class="ion fa-camera-retro"></i>
+              <!-- <img style="width:100%" src="http://111.231.107.63:8085/common/554c8d43389748f4a73bae0cad5cb4d7.png" /> -->
             </div>
             <a href="#" class="small-box-footer">查看详细信息 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -231,7 +220,7 @@
         	<a href="addspot">
               <button type="button" class="btn btn-default pull-left"><i class="fa fa-plus"></i> 添加景点</button>
             </a>
-            <div id="page" class="box-tools pull-right">
+            <!-- <div id="page" class="box-tools pull-right">
                 <ul class="pagination pagination-sm inline">
                   <li hidden="hidden" id="current_page"></li>
                   <li hidden="hidden" id="page_size"></li>
@@ -241,7 +230,7 @@
                   <li><a href="#">3</a></li>
                   <li><a href="#">&raquo;</a></li>
                 </ul>
-            </div>
+            </div> -->
          </div>
       </div>
       <!-- /.row -->

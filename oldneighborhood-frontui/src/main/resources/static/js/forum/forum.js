@@ -1,12 +1,12 @@
 $().ready(function() {
 	
 	var timelineHTML = $("#forum_timeline");
-	var reverseHTML = $("#forum_reverse");
+//	var reverseHTML = $("#forum_reverse");
 	var viewHTML= $("#forum_view");
 	
 	$.ajax({
 		//转发论坛列表请求-正序
-        url: "",
+        url: "/admin/forumlist",
         type: 'post',
         contentType:'application/json',
         dataType:"json",

@@ -31,14 +31,15 @@ $().ready(function() {
     	}else{
     		var ad_name = $("#ad_name").val();
     		var ad_password = $("#ad_password").val();
+    		var ad_permission = "WWWWW";
     		
-    		var config = $("#config-permission").val();
+    		/*var config = $("#config-permission").val();
     		var site = $("#site-permission").val();
     		var announce = $("#announce-permission").val();
     		var forum = $("#forum-permission").val();
     		var data = $("#data-permission").val();
     		//形如"rrrrr"/"wwwww"/"rwrwr"
-    		var ad_permission = config + site + announce + forum + data;
+    		var ad_permission = config + site + announce + forum + data;*/
 //    		console.log(ad_name + ad_password + ad_permission);
     		
     		$.ajax({

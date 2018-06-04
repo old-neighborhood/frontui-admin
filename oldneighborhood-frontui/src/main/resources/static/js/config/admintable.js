@@ -26,14 +26,14 @@ $().ready(function() {
 //        			'<td>' + data[i].ad_password + '</td>';
         			'<td>******</td>';
         			var permission = data[i].ad_permission;
-        			for (var j = 0; j < permission.length; j++) {
-        				var each = permission.charAt(j);
-        				if(each=="W") {
-        					one += '<td>读/写</td>';
-        				} else {
-        					one += '<td>读</td>';
-        				}
-        			}
+//        			for (var j = 0; j < permission.length; j++) {
+//        				var each = permission.charAt(j);
+//        				if(each=="W") {
+//        					one += '<td>读/写</td>';
+//        				} else {
+//        					one += '<td>读</td>';
+//        				}
+//        			}
         			one += '<td><a name="edit" href="#">修改</a><span> | </span><a name="delete" href="#">删除</a></td></tr>';
         			admin += one;
         		}
@@ -87,12 +87,13 @@ $().ready(function() {
 //		thisHTML[0].innerHTML='<tr><td hidden="hidden">' + thisHTML[0].innerText + '</td>'';
 		thisHTML[1].innerHTML="<input type='text' class='form-control' value='" + thisHTML[1].innerText + "'/>";
 		thisHTML[2].innerHTML="<input type='text' class='form-control' value='" + thisHTML[2].innerText + "'/>";
-		thisHTML[3].innerHTML='<select id="config-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
-		thisHTML[4].innerHTML='<select id="site-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
-		thisHTML[5].innerHTML='<select id="announce-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
-		thisHTML[6].innerHTML='<select id="forum-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
-		thisHTML[7].innerHTML='<select id="data-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
-		thisHTML[8].innerHTML='<a name="confirm" href="#">确认</a><span> | </span><a name="cancel" href="#">取消</a>';
+//		thisHTML[3].innerHTML='<select id="config-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
+//		thisHTML[4].innerHTML='<select id="site-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
+//		thisHTML[5].innerHTML='<select id="announce-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
+//		thisHTML[6].innerHTML='<select id="forum-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
+//		thisHTML[7].innerHTML='<select id="data-permission" class="form-control"><option value="R" selected="selected">读</option><option value="W">读/写</option></select>';
+//		thisHTML[8].innerHTML='<a name="confirm" href="#">确认</a><span> | </span><a name="cancel" href="#">取消</a>';
+		thisHTML[3].innerHTML='<a name="confirm" href="#">确认</a><span> | </span><a name="cancel" href="#">取消</a>';
 	})
 	//确认修改
 	$(document).on('click','[name="confirm"]',function(e){
@@ -100,7 +101,8 @@ $().ready(function() {
 		var ad_ID = thisvalue[0].innerText;
 		var ad_name = thisvalue[1].children[0].value;
 		var ad_password = thisvalue[2].children[0].value;
-		var ad_permission = thisvalue[3].children[0].value + thisvalue[4].children[0].value + thisvalue[5].children[0].value + thisvalue[6].children[0].value + thisvalue[7].children[0].value;
+		var ad_permission = 'WWWWW';
+//		var ad_permission = thisvalue[3].children[0].value + thisvalue[4].children[0].value + thisvalue[5].children[0].value + thisvalue[6].children[0].value + thisvalue[7].children[0].value;
 		console.log(ad_permission);
 		
 		$.ajax({

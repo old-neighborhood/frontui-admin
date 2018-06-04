@@ -11,6 +11,8 @@ public interface ManagementService {
 	//公告列表
 	@RequestMapping(value="/management/announcement/listall")
 	public String list();
+	@RequestMapping(value="/management/announcement/list")
+	public String listbypage(Map<String,Object> reqMap);
 	@RequestMapping(value="management/announcement/listSticky")
 	public String listSticky();
 	//发布公告
@@ -32,6 +34,14 @@ public interface ManagementService {
 	@RequestMapping(value="/management/announcement/delete")
 	public String delete(Map<String,Object> reqMap);
 	//景点
+	@RequestMapping("/management/site/listall")
+	public String listAllSite();
+	
+	@RequestMapping("/management/site/add")
+	public String addSimple(Map<String,Object> reqMap);
+	
+	@RequestMapping("/management/site/update")
+	public String updateDetail(Map<String,Object> reqMap);
 	
 
 }

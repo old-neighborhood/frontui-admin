@@ -86,19 +86,8 @@
             <li><a href="api"><i class="fa fa-link"></i> API配置</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-bank"></i>
-            <span>景区管理</span>
-            <span class="pull-right-container">
-              <span class="fa fa-angle-left pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="spot"><i class="fa fa-camera"></i> 景点</a></li>
-            <li><a href="market"><i class="fa fa-shopping-cart"></i> 店铺</a></li>
-          </ul>
-        </li>
+        <li><a href="spot"><i class="fa fa-bank"></i> <span> 景区管理</span></a></li>
+        <li><a href="market"><i class="fa fa-shopping-cart"></i> <span> 店铺管理</span></a></li>
         <li><a href="announce"><i class="fa fa-file-text-o"></i> <span> 公告管理</span></a></li>
         <li><a href="forum"><i class="fa fa-quote-left"></i> <span> 论坛管理</span></a></li>
         <li><a href="flow"><i class="fa fa-bar-chart"></i> <span> 信息统计</span></a></li>
@@ -134,11 +123,11 @@
             <div class="box-body">
               <div class="form-group">
                 <label for="announce_name">标题</label>
-                <input class="form-control" value="老街坊......" />
+                <input id="announce_name" class="form-control" value="老街坊......" />
               </div>
               <div class="form-group">
                 <label for="announce_author">作者</label>
-                <input class="form-control" value="Bryan" />
+                <input id="announce_author" class="form-control" value="Bryan" />
               </div>
               <div class="form-group">
                 <label for="announce_author">公告内容</label>
@@ -148,11 +137,11 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
+              <button id="cancel" type="button" class="btn btn-default"><i class="fa fa-undo"></i> 取消</button>
               <div class="pull-right">
-                <button id="modify" type="button" class="btn btn-default"><i class="fa fa-undo"></i> 取消</button>
-                <button id="cancel" type="button" class="btn btn-primary"><i class="fa fa-send"></i> 发布</button>
+                <button id="modify" type="button" class="btn btn-primary"><i class="fa fa-send"></i> 发布</button>
               </div>
-              <button type="reset" class="btn btn-danger"><i class="fa fa-times"></i> 清空</button>
+              <!-- <button type="reset" class="btn btn-danger"><i class="fa fa-times"></i> 清空</button> -->
             </div>
             <!-- /.box-footer -->
           </div>
@@ -213,9 +202,9 @@
 <script src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<script src="js/toastr.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="js/announce/modify.js"></script>
-
 </body>
 </html>
