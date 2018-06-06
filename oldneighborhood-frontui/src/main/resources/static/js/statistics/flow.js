@@ -215,12 +215,12 @@ $().ready(function(){
 		    },
 		    series : [
 		        {
-		            name:'访问来源',
+		            name:'停车位',
 		            type:'pie',
 		            radius : '55%',
 		            center: ['50%', '50%'],
 		            data:[
-		                {value:132, name:'可用停车位'},
+		                {value:132, name:'可用'},
 		                {value:80, name:'已占用'}
 		            ].sort(function (a, b) { return a.value - b.value; }),
 		            roseType: 'radius',

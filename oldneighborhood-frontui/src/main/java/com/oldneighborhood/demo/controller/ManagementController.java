@@ -20,14 +20,6 @@ import com.oldneighborhood.demo.service.ManagementService;
 @Controller
 public class ManagementController {
 	
-	@RequestMapping("/market")
-	public String market(ModelMap map, HttpSession session) {
-		String userID = (String) session.getAttribute("userID");
-		if (userID == null) {
-		return "/login";
-		}
-		return "/site/market";
-	}
 	
 	//页面跳转部分
 	@RequestMapping("/announce")

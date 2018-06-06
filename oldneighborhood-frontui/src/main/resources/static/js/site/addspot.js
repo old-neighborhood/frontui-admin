@@ -80,7 +80,7 @@ $().ready(function() {
 //            		btn.attr("disabled","disabled");
             		btn.html("重新上传");
             		imageurl = msg.filename;
-            		var imgHTML = '<br><img alt="题图" src="' + imageurl + '" width="500px">';
+            		var imgHTML = '<br><img alt="题图" src="' + imageurl + '" width="200px">';
             		console.log("上传成功！");
             		$("#uploadedimage").html(imgHTML);
             	}else if(flag=="error"){

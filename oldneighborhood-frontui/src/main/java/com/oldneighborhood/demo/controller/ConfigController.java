@@ -2,6 +2,7 @@ package com.oldneighborhood.demo.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,11 @@ public class ConfigController {
 
 	// admin管理员信息
 	@RequestMapping("/admin")
-	public String admintable() {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+	public String admintable(HttpSession session) {
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+			return "/login";
+		}
 		return "/config/admin";
 	}
 	

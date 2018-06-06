@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,23 @@ public class MarketController {
 	@Resource
 	private MarketService marketService;
 	
+	@RequestMapping("/marketone")
+	public String getMarketOnePage(HttpSession session) {
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
+		return "/site/marketdetail";
+	}
 	
+	@RequestMapping("/market")
+	public String market(ModelMap map, HttpSession session) {
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+		return "/login";
+		}
+		return "/site/market";
+	}
 	
 	@RequestMapping("/setM_ID")
 	@ResponseBody
@@ -46,6 +63,7 @@ public class MarketController {
 		return marketService.modifyMarket(reqMap);
 	}
 	
+	//审核店铺
 	
 	@RequestMapping("/recoverMarket")
 	@ResponseBody

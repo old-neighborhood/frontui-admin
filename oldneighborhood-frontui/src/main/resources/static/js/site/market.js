@@ -104,66 +104,8 @@ var id;
 		    timeout: 3000,
 		    contentType: "application/json;utf-8",
 		    success:function(data){
-//			window.location.href = "/MarketInfo";
 		    	console.log("setID");
-		    	$.ajax({
-		    		async: false,
-		    		type: "GET",
-		    		cache:false, 
-		    		dataType: 'json',
-		    		url: "/admin/getMarket",
-		    		timeout: 3000,
-		    		contentType: "application/json;utf-8",
-		    		success: function(data) {
-//		    			console.log(data);
-		    			msg=data;
-		    			if (msg!=null) {
-		    					var type;
-		    				    if(msg.m_type=="food"){
-		    				    	type="美食";
-		    				    }else if(msg.m_type=="hotel"){
-		    				    	type="酒店";
-		    				    }else if(msg.m_type=="shop"){
-		    				    	type="商店";
-		    				    }
-		    				    
-		    				    var state;
-		    				    if (msg.m_state=="zhuxiao") {
-		    						state = "正在注销";
-		    					}else if(msg.m_state=="shenqing"){
-		    						state = "正在申请";
-		    					}else if(msg.m_state=="zhengchang"){
-		    						state = "正常运行";
-		    					}
-		    					 var detail = '<div class="col-md-4"><div class="row">' +
-		    					 			'<div class="pull-left" style="margin-left: 10px;">'+
-		    					 			'<h3 id="m_name">' + msg.m_name + '</h3></div>' + 
-		    					 			'<div class="pull-right" id="hasBtn"></div></div><input type="hidden" value="' + msg.m_ID + '">' +
-		    					 			'<img id="head" alt="Market Img" name="image" class="img-responsive" style="height:100%;width:100%;margin-top:10px;" src="/admin'+ msg.m_image +'">' +
-		    					 			'<div class="mx-1" style="color:#666;">' + 
-		    					 			'<p id="m_address"><br><label>地址：</label>' + msg.m_address.split(",")[0] + '</p>' + 
-		    					 			'<p id="m_tele"><label>电话：</label>' + msg.m_tele + '</p>'+
-		    					 			'<p id="m_email"><label>邮箱：</label>' + msg.m_email + '</p>'+
-		    					 			'<p id="m_type"><label>类型：</label>' + type + '</p>' +
-		    					 			'<p id="m_intro"><label>介绍：</label>' + msg.m_intro + '</p>'+
-		    					 			'<p id="m_state"><label>状态：</label>' + state + '</p>'+
-		    					 			'<p id="m_date"><label>创建时间：</label>' + (new Date(msg.m_date)).format("yyyy-MM-dd hh:mm:ss") + '</p></div></div></div>' +
-		    					 			'<div class="col-md-4 pull-right">' + 
-		    					 			'</div>';
-		    					 
-		    					 
-		    					 
-		    					 /*<div class="col-md-3 pull-right" style="margin-right:20px;">
-									<img id="head" name="image" data-toggle="modal" data-target="#myModal" class="img-responsive pull-right" style="height:150px;width:300px;margin-top:20px;" src="/market/de77175e8b8642549cc71e0e6dfbd3f8.jpg">
-										<div id="container" style="margin-top: 200px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden; transform: translateZ(0px);">
-										<a class="search-plus" data-toggle="modal" data-target="#mapModal">
-										<i class="icon fa fa-search-plus" style="font-size:18px;"></i></a>
-								</div>*/
-		    					 $('#marketdetail').html(detail);
-		    					 //地图显示
-		    					 
-		    				}
-		    		}});
+		    	window.location = "/admin/marketone";
 		    },error:function(e){
 		    	console.log("setfail");
 		    }

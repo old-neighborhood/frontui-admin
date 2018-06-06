@@ -126,6 +126,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/getInfo")
+	@ResponseBody
 	public String profile(@RequestBody Map<String, Object> reqMap, HttpSession session) {
 //		String userID = (String) session.getAttribute("userID");
 //		String userType = (String) session.getAttribute("usertype");

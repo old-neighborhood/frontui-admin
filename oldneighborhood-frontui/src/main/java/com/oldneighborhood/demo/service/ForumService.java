@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "neighborhood-forum-management-service")
+@FeignClient(value = "neighborhood-forum-management")
 public interface ForumService {
 	@RequestMapping(value="/oldneighborhood/forum/forumlist",method=RequestMethod.GET)
 	public String forumlist(Map<String, Object> reqMap);

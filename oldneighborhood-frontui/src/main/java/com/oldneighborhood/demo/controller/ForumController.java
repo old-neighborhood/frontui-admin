@@ -21,11 +21,20 @@ public class ForumController {
 	
 	@RequestMapping("/forum")
 	public String forums(HttpSession session) {
-		// User user = (User) session.getAttribute("user");
-		// if (user == null) {
-		// return "/login";
-		// }
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+			return "/login";
+		}
 		return "/forum/forum";
+	}
+	
+	@RequestMapping("/posts")
+	public String forum(HttpSession session) {
+		String userID = (String) session.getAttribute("userID");
+		if (userID == null) {
+			return "/login";
+		}
+		return "/forum/posts";
 	}
 	
 	@RequestMapping("/setF_ID")
@@ -104,19 +113,6 @@ public class ForumController {
 		return forumService.deleteforum(session.getAttribute("f_ID").toString());
 	}
 	
-	@RequestMapping("/newpost")
-	@ResponseBody
-	public String newpost(@RequestBody Map<String, Object> reqMap) {
-		return forumService.newpost(reqMap);
-	}
-	
-	@RequestMapping("/editpost")
-	@ResponseBody
-	public String editpost(@RequestBody Map<String, Object> reqMap,HttpSession session) {
-		reqMap.put("p_ID", session.getAttribute("p_ID").toString());
-		return forumService.editpost(reqMap);
-	}
-	
 	@RequestMapping("/deletepost")
 	@ResponseBody
 	public String deletepost(HttpSession session) {
@@ -129,30 +125,8 @@ public class ForumController {
 		return forumService.totalCollect(reqMap.get("f_ID").toString())+"";
 	}
 	
-	@RequestMapping("/isCollect")
-	@ResponseBody
-	public boolean isCollect(@RequestBody Map<String, Object> reqMap) {
-		return forumService.isCollect(reqMap);
-	}
-	
-	@RequestMapping("/newCollect")
-	@ResponseBody
-	public boolean newCollect(@RequestBody Map<String, Object> reqMap) {
-		return forumService.newCollect(reqMap);
-	}
-	
-	@RequestMapping("/deleteCollect")
-	@ResponseBody
-	public boolean deleteCollect(@RequestBody Map<String, Object> reqMap) {
-		return forumService.deleteCollect(reqMap);
-	}
 	
 
-	@RequestMapping("/postImg")
-	@ResponseBody
-	public String postImg(@RequestBody Map<String, Object> reqMap) {
-		return forumService.postImg(reqMap);
-	}
 }
 
 /*@Controller
