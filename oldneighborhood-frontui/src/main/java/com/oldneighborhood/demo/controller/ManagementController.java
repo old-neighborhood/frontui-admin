@@ -92,17 +92,13 @@ public class ManagementController {
 	@RequestMapping("/setAnnouncementID")
 	public @ResponseBody String setannoucement_ID(@RequestBody Map<String,Object> map, HttpSession session) {
 		String a_ID = map.get("a_ID").toString();
-//		String prev_ID = map.get("prev_ID").toString();
-//		String next_ID = map.get("next_ID").toString();
-//		System.out.println("Announcement_ID - > " + a_ID + "<" + prev_ID + ">" + next_ID);
 		System.out.println("Announcement_ID - > " + a_ID);
 		session.setAttribute("announcement_ID", a_ID);
 		return "{\"result\":\"success\"}";
 	}
 	//session存储当前site_ID
 	@RequestMapping("/setSiteID")
-	public @ResponseBody String setSiteID(@RequestBody Map<String,Object> map, HttpSession session) {
-		String site_ID = map.get("site_ID").toString();
+	public @ResponseBody String setSiteID(String site_ID, HttpSession session) {
 		System.out.println("site_ID - > " + site_ID);
 		session.setAttribute("site_ID", site_ID);
 		return "{\"result\":\"success\"}";
@@ -112,36 +108,36 @@ public class ManagementController {
 	 * 以下是通过接口调用远程服务
 	 */
 	@Autowired
-	private ManagementService announcementService;
+	private ManagementService managementService;
 	
 	@RequestMapping("/getAnnouncementList")
 	@ResponseBody
 	public String getlist() {
-		return announcementService.list();
+		return managementService.list();
 	}
 	@RequestMapping("/getAnnouncementPage")
 	@ResponseBody
 	public String getlistPage(@RequestBody Map<String, Object> reqMap) {
-		return announcementService.listbypage(reqMap);
+		return managementService.listbypage(reqMap);
 	}
 	@RequestMapping("/getStickyList")
 	@ResponseBody
 	public String getStickylist() {
-		return announcementService.listSticky();
+		return managementService.listSticky();
 	}
 	
 	@RequestMapping("/release")
 	@ResponseBody
 	public String release(@RequestBody Map<String, Object> reqMap, HttpSession session) {
 		System.out.println(reqMap);
-		return announcementService.release(reqMap);
+		return managementService.release(reqMap);
 	}
 	
 	@RequestMapping("/update")
 	@ResponseBody
 	public String update(@RequestBody Map<String, Object> reqMap) {
 //		reqMap.put("ad_ID", "80d09f45cdd24b55926ba52b77204b05");
-		return announcementService.modify(reqMap);
+		return managementService.modify(reqMap);
 	}
 	
 	@RequestMapping("/announceDetail")
@@ -150,8 +146,8 @@ public class ManagementController {
 		String a_ID = (String) session.getAttribute("announcement_ID");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("a_ID", a_ID);
-		System.out.println(announcementService.detail(map));
-		return announcementService.detail(map);
+		System.out.println(managementService.detail(map));
+		return managementService.detail(map);
 	}
 	
 	@RequestMapping("/delete")
@@ -160,8 +156,8 @@ public class ManagementController {
 		String a_ID = (String) session.getAttribute("announcement_ID");
 		Map<String, Object> reqMap = new HashMap<String, Object>();
 		reqMap.put("a_ID", a_ID);
-		System.out.println(announcementService.delete(reqMap));
-		return announcementService.delete(reqMap);
+		System.out.println(managementService.delete(reqMap));
+		return managementService.delete(reqMap);
 	}
 	
 	@RequestMapping("/stick")
@@ -170,8 +166,8 @@ public class ManagementController {
 		String a_ID = (String) session.getAttribute("announcement_ID");
 		Map<String, Object> reqMap = new HashMap<String, Object>();
 		reqMap.put("a_ID", a_ID);
-		System.out.println(announcementService.stick(reqMap));
-		return announcementService.stick(reqMap);
+		System.out.println(managementService.stick(reqMap));
+		return managementService.stick(reqMap);
 	}
 	
 	@RequestMapping("/unstick")
@@ -180,21 +176,42 @@ public class ManagementController {
 		String a_ID = (String) session.getAttribute("announcement_ID");
 		Map<String, Object> reqMap = new HashMap<String, Object>();
 		reqMap.put("a_ID", a_ID);
-		System.out.println(announcementService.unstick(reqMap));
-		return announcementService.unstick(reqMap);
+		System.out.println(managementService.unstick(reqMap));
+		return managementService.unstick(reqMap);
 	}
 	
 	@RequestMapping("/getSiteList")
 	@ResponseBody
 	public String getSitelist() {
-		return announcementService.listAllSite();
+		return managementService.listAllSite();
 	}
 	
 	@RequestMapping("/addSimpleSite")
 	@ResponseBody
 	public String simpleAddSite(@RequestBody Map<String, Object> reqMap) {
-		return announcementService.addSimple(reqMap);
+		return managementService.addSimple(reqMap);
 	}
 	
-
+	@RequestMapping("/updatepart")
+	@ResponseBody
+	public String updatepart(@RequestBody Map<String, Object> reqMap) {
+		return managementService.updatepart(reqMap);
+	}
+	
+	@RequestMapping("/getSiteDetail")
+	@ResponseBody
+	public String SiteDetail(HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("site_ID", session.getAttribute("site_ID").toString());
+		return managementService.findByID(map);
+	}
+	
+	@RequestMapping("/deletesite")
+	@ResponseBody
+	public String delSite(HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("site_ID", session.getAttribute("site_ID").toString());
+		return managementService.delByID(map);
+	}
+	
 }

@@ -43,5 +43,13 @@ public interface ManagementService {
 	@RequestMapping("/management/site/update")
 	public String updateDetail(Map<String,Object> reqMap);
 	
+	@RequestMapping("/management/site/updatepart")
+	public String updatepart(Map<String,Object> reqMap);
+	
+	@RequestMapping("/management/site/findID")
+	public String findByID(Map<String,Object> reqMap);
+	
+	@RequestMapping("/management/site/delete")
+	public String delByID(Map<String,Object> reqMap);
 
 }

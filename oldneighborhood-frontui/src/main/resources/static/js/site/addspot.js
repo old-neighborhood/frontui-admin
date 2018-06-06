@@ -3,6 +3,12 @@
  */
 
 $().ready(function() {
+	var imageurl = "";
+	var site_name = "";
+	var site_address = "";
+	var site_ticket  = "";
+	var site_time = "";
+	var site_ID = null;
 	
 	var E = window.wangEditor
     var editor = new E('#editor')
@@ -58,7 +64,7 @@ $().ready(function() {
     		        map.addControl(new AMap.OverView({isOpen:true}));
       });*/
     
-    var imageurl = null;
+    
 	console.log("ready");
 	$("#upload").click(function(){
 		var form = $("#upload_image");
@@ -66,7 +72,6 @@ $().ready(function() {
 		var btn = $("#upload");
 		$.ajax({
             url: 'http://111.231.107.63:8085/common/file/fileupload',
-//            url: 'http://111.231.107.63:8085/common/fileupload',
             type: 'POST',
             data: formdata,                    // 上传formdata封装的数据
             dataType: 'JSON',
@@ -99,17 +104,18 @@ $().ready(function() {
 //    	  $("#simple").hide();
 //    	  $("#detail").show();
     	  
-  		var site_name = $("#site_name").val();
-  		var site_type = $("#site_type").val();
-  		
-  		var site_address = $("#site_address").val();
-  		var spot_ticket = $("#spot_ticket").val();
-//  		var spot_image = "";
-//  		if (imageurl!=null) {
-//  			spot_image = imageurl;
-//		}
-//  		var site_intro = editor.txt.html();
-  		console.log(site_name + site_type + site_address + spot_ticket);
+  		site_name = $("#site_name").val();
+//  		var site_type = $("#site_type").val();
+  		site_address = $("#site_address").val();
+  		site_ticket = $("#spot_ticket").val();
+  		site_time = $("#site_time").val();
+  		if (site_time=="") {
+			site_time="8:00am~17:00pm";
+		}
+  		if (site_ticket=="") {
+			site_ticket = "0";
+		}
+  		console.log(site_name + site_time + site_address + site_ticket);
   		$.ajax({
               url: "/admin/addSimpleSite",
               type: 'post',
@@ -117,11 +123,11 @@ $().ready(function() {
               data:JSON.stringify({
               	"site_name":site_name,
               	"site_address":site_address,
-              	"site_ticket":spot_ticket,
-              	"site_time":"8:00~17:00",
+              	"site_ticket":site_ticket,
+              	"site_time":site_time,
       			//"site_image":spot_image,
       			"ad_ID":"80d09f45cdd24b55926ba52b77204b05",
-      			"site_type":site_type,
+      			"site_type":"spot",
               }), 
               dataType:"json",
   			  timeout:5000,
@@ -132,8 +138,10 @@ $().ready(function() {
               		toastr.warning("新建失败！");
   				}else if(status == "success") {
   					toastr.success("新建成功！");
+  					site_ID = data.site_ID;
   					 $("#simple").hide();
   					$("#detail").show();
+  					$("#spotinfo").html(site_name);
 //  					setTimeout(function(){
 //  						window.location = "spotdetail";
 //  					},1000);
@@ -145,29 +153,18 @@ $().ready(function() {
   	});
       
       $("#intro").click(function(){
-  		var site_name = $("#site_name").val();
-  		var site_type = $("#site_type").val();
-  		
-  		var site_address = $("#site_address").val();
-  		var spot_ticket = $("#spot_ticket").val();
-  		var spot_image = "";
-  		if (imageurl!=null) {
-  			spot_image = imageurl;
+  		if (imageurl=="") {
+  			imageurl = "/admin/default.png";
 		}
   		var site_intro = editor.txt.html();
-  		console.log(site_name + site_type + site_address + spot_ticket);
   		$.ajax({
-              url: "/admin/addSimpleSite",
+              url: "/admin/updatepart",
               type: 'post',
               contentType:'application/json',
               data:JSON.stringify({
-              	"site_name":site_name,
-              	"site_address":site_address,
-              	"site_ticket":spot_ticket,
-              	"site_time":"8:00~17:00",
-      			//"site_image":spot_image,
-      			"ad_ID":"80d09f45cdd24b55926ba52b77204b05",
-      			"site_type":site_type,
+              	"site_ID":site_ID,
+              	"site_image":imageurl,
+              	"site_intro":site_intro,
               }), 
               dataType:"json",
   			  timeout:5000,
@@ -178,18 +175,29 @@ $().ready(function() {
               		toastr.warning("新建失败！");
   				}else if(status == "success") {
   					toastr.success("新建成功！");
-  					 $("#simple").hide();
-  					$("#detail").show();
-//  					setTimeout(function(){
-//  						window.location = "spotdetail";
-//  					},1000);
+  					var spotid = site_ID;
+  					$.ajax({
+  						async: false,
+  					    type: "GET",
+  					    cache:false, 
+  					    dataType: 'json',
+  					    url: "/admin/setSiteID",
+  					    data: {"site_ID":spotid},
+  					    timeout: 3000,
+  					    contentType: "application/json;utf-8",
+  					    success:function(data){
+  					    	console.log("setID");
+  					    	window.location = "/admin/spotdetail";
+  					    },error:function(e){
+  					    	console.log("setfail");
+  					    }
+  					});
   				}
               },error:function() {
             	  toastr.error("调用失败");
               }
   		});
   	});  
-      
       
       
 });

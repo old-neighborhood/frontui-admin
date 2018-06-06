@@ -72,6 +72,25 @@ $().ready(function() {
 	
 	$(document).on('click',"[name='pass']",function(e){ 
 		console.log("pass");
+		$.ajax({
+			async: false,
+			type: "GET",
+			cache:false, 
+//			data:JSON.stringify({
+//		    	"a_ID":id,
+//		    	"prev_ID":prev_id,
+//	        	"next_ID":next_id
+//	            }), 
+			dataType: 'json',
+			url: "/admin/recoverMarket",
+			timeout: 3000,
+			contentType: "application/json;utf-8",
+			success: function(data) {
+				window.location="/admin/marketone";
+			},error: function(e){
+				console.log("pass fail");
+			}
+		});
 		
 		//重置本页
 //		window.location = "/admin/marketone";

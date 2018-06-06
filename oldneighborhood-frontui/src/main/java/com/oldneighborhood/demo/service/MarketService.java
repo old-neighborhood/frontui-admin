@@ -25,6 +25,6 @@ public interface MarketService {
 	@RequestMapping(value="/Saler/deleteMarket",method=RequestMethod.GET)
 	public String deleteMarket(String m_ID);
 
-	@RequestMapping(value="/Saler/recoverMarket",method=RequestMethod.GET)
+	@RequestMapping(value="/Saler/recoverMarket")
 	public String recoverMarket(String m_ID);
 }

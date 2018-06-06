@@ -131,7 +131,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <div class="row">
-                  <div class="col-md-8">
+                  <div class="col-md-4">
                   <label for="site_name">名称</label>
                   <input type="text" class="form-control" id="site_name" placeholder="科举博物馆" />
                   </div>
@@ -139,14 +139,14 @@
                 </div>
                 <div class="form-group">
                   <div class="row">
-                  <div class="col-md-4">
+                  <!-- <div class="col-md-4">
                   <label>类型</label>
                     <select id="site_type"  name="site_type" class="form-control">
                       <option value="spot" selected="selected">景点</option>
                       <option value="toilet">人文故事</option>
                       <option value="parkinglot">停车场</option>
                     </select>
-                  </div>
+                  </div> -->
                   <div class="col-md-4">
                   <label for="spot_ticket">票价(￥)</label>
                   <input type="text" class="form-control" id="spot_ticket" placeholder="20.00" />
@@ -161,6 +161,15 @@
                   </div>
                 </div>
                 </div>
+                <div class="form-group">
+                  <div class="row">
+                  <div class="col-md-4">
+                  <label for="site_time">开放时间</label>
+                  <input type="text" class="form-control" id="site_time" placeholder="8:00am~17:00pm" />
+                  </div>
+                </div>
+                </div>
+                
                 <!-- <div class="form-group">
                   <div class="row">
                   <div class="col-md-4">
@@ -172,6 +181,7 @@
                 </div> -->
                 
               </div>
+              
               <!-- /.box-body -->
 
               <div class="box-footer">
@@ -182,7 +192,7 @@
           
           <div id="detail" style="display:none" class="box">
             <div class="box-header">
-              <h3 class="box-title">景点介绍
+              <h3 id="spotinfo" class="box-title">景点介绍
                 <small></small>
               </h3>
             </div>
@@ -201,61 +211,8 @@
 	          <br>
 	          <form>
               	<label for="editor">介绍内容</label>
-              	<div id="editor">
-              	</div>
-                <!-- <textarea id="editor" class="textarea" placeholder="请输入内容......" required="required"
-                          style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                </textarea> -->
+              	<div id="editor"></div>
               </form>
-            
-            
-            <!-- <div class="form-group">
-                  <div class="row">
-                  <div class="col-md-4">
-                  
-                  <label for="spot_image">上传封面图</label>
-                  <input type="file" id="spot_image" />
-
-                  <p class="help-block">.jpg|.png|.ico|.svg 比例为600*400最好</p>
-                  </div>
-                  </div>
-                </div> -->
-                <!-- <div class="bootstrap-timepicker">
-                <div class="form-group">
-                <div class="row">
-                <div class="col-md-4">
-                  <label>开始时间</label>
-
-                  <div class="input-group">
-                    <input id="starttime" type="text" class="form-control timepicker" />
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                  </div>
-                  /.input group
-                </div>
-                <div class="col-md-4">
-                  <label>关闭时间</label>
-
-                  <div class="input-group">
-                    <input id="endtime" type="text" class="form-control timepicker" />
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                  </div>
-                  /.input group
-                </div>
-                </div>
-                </div>
-                /.form group
-              </div> -->
-              <!-- <form>
-              	<label for="spot_image">景点文章</label>
-                <textarea id="spot_text" class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-              </form> -->
             </div>
             <div class="box-footer">
                 <button id="intro" type="button" class="btn btn-primary">添加</button>

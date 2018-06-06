@@ -41,6 +41,7 @@ public class MarketController {
 	@ResponseBody
 	public String setM_ID(String m_ID,HttpSession session) {
 		session.setAttribute("m_ID", m_ID);
+		System.out.println("m_ID>" + m_ID);
 		return "{\"result\":\"success\"}";
 	}
 	
@@ -69,5 +70,12 @@ public class MarketController {
 	@ResponseBody
 	public String recoverMarket(HttpSession session) {
 		return marketService.recoverMarket(session.getAttribute("m_ID").toString());
+	}
+	
+	@RequestMapping("/recoverAllMarket")
+	@ResponseBody
+	public String recoverAllMarket(@RequestBody Map<String,Object> reqMap) {
+		String m_ID = reqMap.get("m_ID").toString();
+		return marketService.recoverMarket(m_ID);
 	}
 }
