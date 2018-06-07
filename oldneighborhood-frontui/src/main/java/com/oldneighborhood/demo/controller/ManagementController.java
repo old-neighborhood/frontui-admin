@@ -198,6 +198,12 @@ public class ManagementController {
 		return managementService.updatepart(reqMap);
 	}
 	
+	@RequestMapping("/updateup")
+	@ResponseBody
+	public String updateup(@RequestBody Map<String, Object> reqMap) {
+		return managementService.updateup(reqMap);
+	}
+	
 	@RequestMapping("/getSiteDetail")
 	@ResponseBody
 	public String SiteDetail(HttpSession session) {

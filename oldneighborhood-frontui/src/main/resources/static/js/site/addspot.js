@@ -45,8 +45,6 @@ $().ready(function() {
 //      showInputs: true
 //    })
 //    
-//    //bootstrap WYSIHTML5 - text editor
-//    $('.textarea').wysihtml5()
     
     
 //    var map = new AMap.Map("container", {

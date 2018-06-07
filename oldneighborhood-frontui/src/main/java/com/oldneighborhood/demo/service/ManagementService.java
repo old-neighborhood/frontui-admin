@@ -46,6 +46,9 @@ public interface ManagementService {
 	@RequestMapping("/management/site/updatepart")
 	public String updatepart(Map<String,Object> reqMap);
 	
+	@RequestMapping("/management/site/updateup")
+	public String updateup(Map<String,Object> reqMap);
+	
 	@RequestMapping("/management/site/findID")
 	public String findByID(Map<String,Object> reqMap);
 	
