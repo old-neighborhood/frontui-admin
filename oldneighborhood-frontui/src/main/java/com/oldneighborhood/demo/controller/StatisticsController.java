@@ -16,5 +16,6 @@ public class StatisticsController {
 		}
 		return "/statistics/flow";
 	}
+	
 
 }
